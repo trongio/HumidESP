@@ -134,6 +134,8 @@ Downloads are verified with GitHub's root certificates (`include/github_ca.h`).
 
 ## Cold-room tips
 
+Cleaning schedule, calibration and troubleshooting: [docs/MAINTENANCE.md](docs/MAINTENANCE.md).
+
 - Use **demineralised / RO water** in ultrasonic humidifiers, otherwise white mineral dust settles on the fruit and equipment.
 - Mist should evaporate before it lands on apples. Aim it into the airflow from the cooler fan, not at the crates.
 - Apples are typically stored around 0-4 °C and 90-95 %RH depending on variety. Set the temperature alarms so a cooling failure or freezing (below about -1 °C) reaches your phone.
