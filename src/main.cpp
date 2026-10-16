@@ -10,6 +10,7 @@
 #include <ArduinoJson.h>
 #include <esp_timer.h>
 #include <Update.h>
+#include <mbedtls/sha256.h>
 #include <deque>
 #include <map>
 #include <vector>
@@ -17,6 +18,8 @@
 #include "config.h"
 #include "sensors.h"
 #include "index_html.h"
+#include "ota.h"
+#include "pwa.h"
 
 #if __has_include("secrets.h")
 #include "secrets.h"  // optional, gitignored: DEFAULT_STA_SSID / DEFAULT_STA_PASS
@@ -50,6 +53,7 @@ struct Settings {
   bool waterEnabled = false;
   bool waterOkWhenLow = true; // float switch closed (pin LOW) means water OK
   bool buzzer = false;
+  bool autoUpdate = true;     // install new GitHub releases by itself
   String webhook;
   String apPass = AP_DEFAULT_PASS;
   String staSsid;
@@ -133,6 +137,13 @@ static uint32_t lastBeepMs = 0;
 static uint32_t restartAt = 0, apRestartAt = 0, lastStaAttempt = 0;
 static String scanCache = "[]";
 
+// Web password (off while authOn is false) and login sessions, oldest first, all zero = free.
+static const int MAX_SESSIONS = 8;
+static bool authOn = false, uploadDenied = false;
+static uint8_t pwSalt[16], pwHash[32], sessions[MAX_SESSIONS][16];
+static int loginFails = 0;
+static uint32_t lockUntil = 0, ledFastUntil = 0;
+
 static WebServer server(80);
 static DNSServer dns;
 static Preferences prefs;
@@ -197,6 +208,7 @@ static void loadSettings() {
   S.waterEnabled = prefs.getBool("water", false);
   S.waterOkWhenLow = prefs.getBool("waterLow", true);
   S.buzzer = prefs.getBool("buzzer", false);
+  S.autoUpdate = prefs.getBool("autoUpd", true);
   S.webhook = prefs.getString("webhook", "");
   S.apPass = prefs.getString("apPass", AP_DEFAULT_PASS);
   S.staSsid = prefs.getString("ssid", DEFAULT_STA_SSID);
@@ -228,6 +240,9 @@ static void loadSettings() {
   d.clear();
   String sj = prefs.getString("sensors", "");
   if (sj.length() && !deserializeJson(d, sj)) sensorsFromJson(d.as<JsonArrayConst>());
+  if (prefs.isKey("pwHash"))
+    authOn = prefs.getBytes("pwHash", pwHash, 32) == 32 && prefs.getBytes("pwSalt", pwSalt, 16) == 16;
+  if (prefs.isKey("sess")) prefs.getBytes("sess", sessions, sizeof(sessions));
   prefs.end();
 
   if (sensors.empty()) {  // first boot: the DHT11 on the desk
@@ -255,6 +270,7 @@ static void saveSettings() {
   prefs.putBool("water", S.waterEnabled);
   prefs.putBool("waterLow", S.waterOkWhenLow);
   prefs.putBool("buzzer", S.buzzer);
+  prefs.putBool("autoUpd", S.autoUpdate);
   prefs.putString("webhook", S.webhook);
   prefs.putString("apPass", S.apPass);
   prefs.putString("ssid", S.staSsid);
@@ -584,7 +600,9 @@ static void serviceButtons() {
 static void updateIndicators() {
   bool any = false;
   for (auto &c : ch) any |= c.on;
-  if (!alerts.empty()) digitalWrite(PIN_LED, (millis() / 400) % 2);
+  if (ledFastUntil && (int32_t)(millis() - ledFastUntil) >= 0) ledFastUntil = 0;
+  if (ledFastUntil) digitalWrite(PIN_LED, (millis() / 60) % 2);  // BOOT button reset acknowledged
+  else if (!alerts.empty()) digitalWrite(PIN_LED, (millis() / 400) % 2);
   else digitalWrite(PIN_LED, any);
 
   if (beepsLeft > 0 && millis() - lastBeepMs > 150) {
@@ -640,9 +658,170 @@ static bool parseBody(JsonDocument &doc) {
   return true;
 }
 
+// ---------- Web password and sessions ----------
+static bool ctEqual(const uint8_t *a, const uint8_t *b, size_t n) {  // constant time
+  uint8_t diff = 0;
+  for (size_t i = 0; i < n; i++) diff |= a[i] ^ b[i];
+  return !diff;
+}
+
+static void randomFill(uint8_t *b) {  // 16 bytes from the hardware RNG
+  for (int i = 0; i < 16; i += 4) { uint32_t r = esp_random(); memcpy(b + i, &r, 4); }
+}
+
+static void hashPassword(const char *pw, uint8_t *out) {  // SHA-256(salt + password)
+  mbedtls_sha256_context c;
+  mbedtls_sha256_init(&c);
+  mbedtls_sha256_starts_ret(&c, 0);
+  mbedtls_sha256_update_ret(&c, pwSalt, sizeof(pwSalt));
+  mbedtls_sha256_update_ret(&c, (const uint8_t *)pw, strlen(pw));
+  mbedtls_sha256_finish_ret(&c, out);
+  mbedtls_sha256_free(&c);
+}
+
+static void saveAuth() {
+  prefs.begin("humid", false);
+  if (authOn) {
+    prefs.putBytes("pwSalt", pwSalt, sizeof(pwSalt));
+    prefs.putBytes("pwHash", pwHash, sizeof(pwHash));
+  } else if (prefs.isKey("pwHash")) {
+    prefs.remove("pwHash");
+    prefs.remove("pwSalt");
+  }
+  prefs.putBytes("sess", sessions, sizeof(sessions));
+  prefs.end();
+}
+
+static void clearAuth() {  // password off, all sessions gone
+  authOn = false;
+  memset(sessions, 0, sizeof(sessions));
+  loginFails = lockUntil = 0;
+  saveAuth();
+}
+
+// Session slot named by the request's hsid cookie, or -1. Every slot is compared.
+static int currentSession() {
+  String c = server.header("Cookie");
+  int p = -1;
+  do p = c.indexOf("hsid=", p + 1); while (p > 0 && c[p - 1] != ' ' && c[p - 1] != ';');
+  if (p < 0 || (int)c.length() < p + 37) return -1;
+  uint8_t tok[16], zero[16] = {0};
+  for (int i = 0; i < 32; i++) {
+    char h = c[p + 5 + i];
+    int v = isdigit(h) ? h - '0' : (h >= 'a' && h <= 'f') ? h - 'a' + 10 : -1;
+    if (v < 0) return -1;
+    tok[i / 2] = (i % 2) ? (tok[i / 2] | v) : v << 4;
+  }
+  int found = -1;
+  for (int i = 0; i < MAX_SESSIONS; i++)
+    if (ctEqual(sessions[i], tok, 16) & !ctEqual(tok, zero, 16)) found = i;
+  return found;
+}
+
+static bool authorized() { return !authOn || currentSession() >= 0; }
+static void sendLoginRequired() { server.send(401, "application/json", "{\"error\":\"login required\"}"); }
+
+static void setCookie(const String &tok, int maxAge) {
+  server.sendHeader("Set-Cookie", "hsid=" + tok + "; Path=/; Max-Age=" + maxAge + "; HttpOnly; SameSite=Strict");
+}
+
+static void startSession() {  // new random token in the newest slot, evicting the oldest when full
+  int n = 0;
+  uint8_t zero[16] = {0};
+  while (n < MAX_SESSIONS && !ctEqual(sessions[n], zero, 16)) n++;
+  if (n == MAX_SESSIONS) memmove(sessions[0], sessions[1], sizeof(sessions) - 16), n--;
+  char hex[33];
+  randomFill(sessions[n]);
+  for (int i = 0; i < 16; i++) sprintf(hex + 2 * i, "%02x", sessions[n][i]);
+  saveAuth();
+  setCookie(hex, 2592000);
+}
+
+// Checks a password with brute-force lockout. On failure it sends 403/429 and returns false.
+static bool checkPassword(const char *pw) {
+  if (lockUntil && (int32_t)(millis() - lockUntil) >= 0) lockUntil = 0;
+  if (!lockUntil) {
+    uint8_t h[32];
+    hashPassword(pw, h);
+    if (ctEqual(h, pwHash, 32)) { loginFails = 0; return true; }
+    loginFails = min(loginFails + 1, 100);
+    if (loginFails < 5) { server.send(403, "application/json", "{\"error\":\"wrong password\"}"); return false; }
+    uint32_t secs = min<uint32_t>(30UL << min(loginFails - 5, 5), 600);  // 30 s doubling up to 10 min
+    lockUntil = (millis() + secs * 1000) | 1;
+    logEvent("Too many wrong web passwords, login locked for " + String(secs) + " s");
+  }
+  String s((lockUntil - millis()) / 1000 + 1);
+  server.sendHeader("Retry-After", s);
+  server.send(429, "application/json", "{\"error\":\"too many attempts, try again in " + s + " s\",\"retryAfter\":" + s + "}");
+  return false;
+}
+
+static void handleAuth() {
+  server.send(200, "application/json", String("{\"enabled\":") + (authOn ? "true" : "false") +
+                                           ",\"loggedIn\":" + (authorized() ? "true" : "false") + "}");
+}
+
+static void handleLogin() {
+  JsonDocument d;
+  if (!parseBody(d)) return;
+  if (authOn && !checkPassword(d["password"] | "")) return;
+  if (authOn) startSession();
+  sendOk();
+}
+
+static void handleLogout() {
+  int i = currentSession();
+  if (i >= 0) {
+    memmove(sessions[i], sessions[i + 1], (MAX_SESSIONS - 1 - i) * 16);
+    memset(sessions[MAX_SESSIONS - 1], 0, 16);
+    saveAuth();
+  }
+  setCookie("", 0);
+  sendOk();
+}
+
+// {"current", "password"} sets or changes, {"current", "remove":true} turns protection off.
+static void handlePassword() {
+  JsonDocument d;
+  if (!parseBody(d)) return;
+  bool remove = d["remove"] | false;
+  const char *pw = d["password"] | "";
+  if (!remove && (strlen(pw) < 4 || strlen(pw) > 64)) return sendErr("Web password must be 4-64 characters");
+  if (authOn && !checkPassword(d["current"] | "")) return;
+  bool was = authOn;
+  clearAuth();  // ends every session
+  if (remove) {
+    setCookie("", 0);
+    logEvent("Web password removed");
+  } else {
+    randomFill(pwSalt);
+    hashPassword(pw, pwHash);
+    authOn = true;
+    startSession();  // keeps this browser logged in (also saves the hash)
+    logEvent(was ? "Web password changed" : "Web password set");
+  }
+  sendOk();
+}
+
+// Recovery: hold BOOT for 10 s while running. Armed only after the pin reads high once,
+// so a button or auto-reset line still low from flashing can't trigger it.
+static void checkBootButton() {
+  static bool armed = false, fired = false;
+  static uint32_t downAt = 0;
+  if (digitalRead(PIN_BOOT_BUTTON) == HIGH) { armed = true; fired = false; downAt = 0; return; }
+  if (!armed || fired) return;
+  if (!downAt) downAt = millis() | 1;
+  if (millis() - downAt < 10000) return;
+  fired = true;
+  clearAuth();
+  logEvent("BOOT button held 10 s: web password and sessions cleared");
+  ledFastUntil = (millis() + 2000) | 1;
+}
+
 static void handleState() {
   JsonDocument d;
   d["uptime"] = uptimeS();
+  d["fw"] = FW_VERSION;
   if (!isnan(ctlRh)) { d["rh"] = ctlRh; d["temp"] = ctlT; }
   d["ctlN"] = ctlN;
   d["water"] = S.waterEnabled ? (waterLow() ? "low" : "ok") : "n/a";
@@ -693,6 +872,7 @@ static void handleState() {
   s["waterEnabled"] = S.waterEnabled;
   s["waterOkWhenLow"] = S.waterOkWhenLow;
   s["buzzer"] = S.buzzer;
+  s["autoUpdate"] = S.autoUpdate;
   s["webhook"] = S.webhook;
 
   JsonObject r = d["room"].to<JsonObject>();
@@ -718,6 +898,13 @@ static void handleState() {
     w["rssi"] = WiFi.RSSI();
   }
   w["mdns"] = String(MDNS_HOST) + ".local";
+  d["auth"]["enabled"] = authOn;
+  if (ota.checkedS) {
+    JsonObject o = d["ota"].to<JsonObject>();
+    o["latest"] = ota.latest;
+    o["available"] = ota.available;
+    o["error"] = ota.error;
+  }
   sendJson(d);
 }
 
@@ -798,6 +985,7 @@ static void handleSettings() {
   flag("waterEnabled", S.waterEnabled);
   flag("waterOkWhenLow", S.waterOkWhenLow);
   flag("buzzer", S.buzzer);
+  flag("autoUpdate", S.autoUpdate);
   if (d["aggMode"].is<const char *>())
     for (int k = 0; k < 3; k++) if (d["aggMode"] == AGG_NAMES[k]) S.aggMode = k;
   if (d["webhook"].is<const char *>()) S.webhook = d["webhook"].as<String>();
@@ -1015,24 +1203,68 @@ static void handleNotFound() {
   }
 }
 
+// API route that needs a login once a web password is set.
+// GitHub release updates: checked every 6 h on home Wi-Fi, installed from loop() so the HTTP reply goes out first.
+static bool otaInstallReq = false;
+static uint32_t lastOtaMs = 0;
+
+static void otaRun() {
+  for (int i = 0; i < NUM_CHANNELS; i++) setChannel(i, false, "firmware update");
+  logEvent("Installing firmware " + ota.latest);
+  if (otaInstall()) { logEvent("Firmware update OK, restarting"); restartAt = millis() + 500; }
+  else logEvent("Firmware update failed: " + ota.error);
+}
+
+static void serviceOta() {
+  if (otaInstallReq) { otaInstallReq = false; return otaRun(); }
+  if (WiFi.status() != WL_CONNECTED || millis() < 120000 || (lastOtaMs && millis() - lastOtaMs < 6 * 3600000UL)) return;
+  lastOtaMs = millis();
+  // dev builds (flashed over USB) never replace themselves; install a release by hand once
+  if (otaCheck() && ota.available && S.autoUpdate && otaIsRelease(FW_VERSION)) otaRun();
+}
+
+static void onApi(const char *uri, HTTPMethod m, WebServer::THandlerFunction fn) {
+  server.on(uri, m, [fn] { if (authorized()) fn(); else sendLoginRequired(); });
+}
+
 static void setupServer() {
+  static const char *hdrs[] = {"Cookie"};
+  server.collectHeaders(hdrs, 1);
   server.on("/", HTTP_GET, [] { server.send_P(200, "text/html", INDEX_HTML); });
-  server.on("/api/state", HTTP_GET, handleState);
-  server.on("/api/history", HTTP_GET, handleHistory);
-  server.on("/api/log", HTTP_GET, handleLog);
-  server.on("/api/settings", HTTP_POST, handleSettings);
-  server.on("/api/sensors", HTTP_POST, handleSensors);
-  server.on("/api/bus", HTTP_POST, handleBus);
-  server.on("/api/modbus/scan", HTTP_POST, handleModbusScan);
-  server.on("/api/modbus/setaddr", HTTP_POST, handleModbusSetAddr);
-  server.on("/api/channel", HTTP_POST, handleChannel);
-  server.on("/api/resume", HTTP_POST, handleResume);
-  server.on("/api/scan", HTTP_GET, handleScan);
-  server.on("/api/wifi", HTTP_POST, handleWifi);
-  server.on("/api/wifi/forget", HTTP_POST, handleWifiForget);
-  server.on("/api/test-alert", HTTP_POST, handleTestAlert);
-  server.on("/api/reboot", HTTP_POST, [] { sendOk(); restartAt = millis() + 500; });
-  server.on("/api/factory-reset", HTTP_POST, [] {
+  server.on("/api/auth", HTTP_GET, handleAuth);
+  server.on("/api/login", HTTP_POST, handleLogin);
+  // Home-screen app (PWA) files, public so the phone can fetch them before login.
+  server.on("/manifest.json", HTTP_GET, [] { server.send_P(200, "application/manifest+json", MANIFEST); });
+  auto png = [](const uint8_t *p, size_t n) {
+    return [p, n] { server.sendHeader("Cache-Control", "max-age=604800"); server.send_P(200, "image/png", (PGM_P)p, n); };
+  };
+  server.on("/icon-180.png", HTTP_GET, png(ICON_180, sizeof(ICON_180)));
+  server.on("/icon-512.png", HTTP_GET, png(ICON_512, sizeof(ICON_512)));
+  onApi("/api/ota/check", HTTP_POST, [] { otaCheck(); handleState(); });
+  onApi("/api/ota/install", HTTP_POST, [] {
+    if (!ota.available) return sendErr("No update available");
+    sendOk();
+    otaInstallReq = true;
+  });
+  onApi("/api/logout", HTTP_POST, handleLogout);
+  onApi("/api/password", HTTP_POST, handlePassword);
+  onApi("/api/state", HTTP_GET, handleState);
+  onApi("/api/history", HTTP_GET, handleHistory);
+  onApi("/api/log", HTTP_GET, handleLog);
+  onApi("/api/settings", HTTP_POST, handleSettings);
+  onApi("/api/sensors", HTTP_POST, handleSensors);
+  onApi("/api/bus", HTTP_POST, handleBus);
+  onApi("/api/modbus/scan", HTTP_POST, handleModbusScan);
+  onApi("/api/modbus/setaddr", HTTP_POST, handleModbusSetAddr);
+  onApi("/api/channel", HTTP_POST, handleChannel);
+  onApi("/api/resume", HTTP_POST, handleResume);
+  onApi("/api/scan", HTTP_GET, handleScan);
+  onApi("/api/wifi", HTTP_POST, handleWifi);
+  onApi("/api/wifi/forget", HTTP_POST, handleWifiForget);
+  onApi("/api/test-alert", HTTP_POST, handleTestAlert);
+  onApi("/api/reboot", HTTP_POST, [] { sendOk(); restartAt = millis() + 500; });
+  onApi("/api/factory-reset", HTTP_POST, [] {
+    clearAuth();  // sessions live in "humid" too, this also drops them from RAM
     prefs.begin("humid", false);
     prefs.clear();
     prefs.end();
@@ -1040,16 +1272,24 @@ static void setupServer() {
     restartAt = millis() + 500;
   });
   // Firmware update: upload .pio/build/esp32dev/firmware.bin from the System section.
+  // Auth is checked when the upload starts, so nothing is written without a login.
   server.on("/api/update", HTTP_POST, [] {
+    bool denied = uploadDenied || !authorized();
+    uploadDenied = false;
+    if (denied) return sendLoginRequired();
     bool ok = !Update.hasError();
     server.send(ok ? 200 : 500, "application/json", ok ? "{\"ok\":true}" : "{\"error\":\"update failed\"}");
     if (ok) restartAt = millis() + 1000;
   }, [] {
     HTTPUpload &up = server.upload();
     if (up.status == UPLOAD_FILE_START) {
+      uploadDenied = !authorized();
+      if (uploadDenied) return logEvent("Firmware upload refused: not logged in");
       for (int i = 0; i < NUM_CHANNELS; i++) setChannel(i, false, "firmware update");
       logEvent("Firmware upload: " + up.filename);
       Update.begin(UPDATE_SIZE_UNKNOWN);
+    } else if (uploadDenied) {
+      return;  // nothing was begun, discard the rest of the body
     } else if (up.status == UPLOAD_FILE_WRITE) {
       Update.write(up.buf, up.currentSize);
     } else if (up.status == UPLOAD_FILE_END) {
@@ -1079,6 +1319,7 @@ void setup() {
   pinMode(PIN_BUZZER, OUTPUT);
   digitalWrite(PIN_BUZZER, !BUZZER_ACTIVE_HIGH);
   pinMode(PIN_WATER, INPUT_PULLUP);
+  pinMode(PIN_BOOT_BUTTON, INPUT_PULLUP);
 
   Serial.begin(115200);
   delay(200);
@@ -1123,9 +1364,11 @@ void loop() {
   }
 
   serviceButtons();
+  checkBootButton();
   updateIndicators();
   maintainWifi();
   processNotifications();
+  serviceOta();
 
   if (apRestartAt && millis() > apRestartAt) { apRestartAt = 0; startAP(); logEvent("Hotspot password changed"); }
   if (restartAt && millis() > restartAt) ESP.restart();

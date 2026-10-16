@@ -18,6 +18,12 @@ spots and heights, switches ultrasonic humidifiers to hold a target humidity, an
   Alerts show in the UI, blink the onboard LED, optionally beep a buzzer, and can push to your phone via [ntfy](https://ntfy.sh) or any webhook (when on home Wi-Fi).
 - **24 h history chart** per sensor (RH or temperature) plus event log.
 - **Firmware update over Wi-Fi** from the System section, so you can leave it mounted in the room.
+  On home Wi-Fi it also checks this repo's GitHub releases every 6 h and installs new ones by itself (can be turned off). Open pages reload on their own after an update.
+- **Phone app (PWA)**: open the page on your phone and use "Add to Home screen" (Android Chrome menu, or iOS Safari Share button). While it is open, new alerts beep, vibrate and show in the tab title.
+  Browsers only allow background push on HTTPS sites, which the ESP32 can't serve, so for notifications with the app closed set an [ntfy](https://ntfy.sh) topic in Settings and install the ntfy app.
+- Optional **web password** (Settings → Web password, off by default). Login sessions survive reboots (last 8 devices).
+  5 wrong passwords lock logins for 30 s, doubling up to 10 min. Forgot it? Hold the board's **BOOT** button for 10 s while it runs:
+  the password and all sessions are cleared and the LED blinks fast.
 - Optional **button-press emulation** (PC817 optocoupler) for atomizer boards that power up idle.
 
 ## Important: sensor choice for cold storage
@@ -93,6 +99,18 @@ Optional: create `include/secrets.h` (gitignored) to pre-load home Wi-Fi on firs
 
 Later updates: build with `pio run`, then upload `.pio/build/esp32dev/firmware.bin` from the web UI (System → Update firmware).
 
+### Releases and auto-update
+
+Push a tag like `v0.2.0` and the GitHub workflow builds `firmware.bin` and attaches it to a release:
+
+```bash
+git tag v0.2.0 && git push origin v0.2.0
+```
+
+Devices running a release build pick it up within 6 h (or press System → Check for update). A build flashed over USB reports
+a `git describe` version and never replaces itself automatically, so press Install once to move it onto the release track.
+Downloads are verified with GitHub's root certificates (`include/github_ca.h`).
+
 ## Cold-room tips
 
 - Use **demineralised / RO water** in ultrasonic humidifiers, otherwise white mineral dust settles on the fruit and equipment.
@@ -105,4 +123,11 @@ Later updates: build with `pio run`, then upload `.pio/build/esp32dev/firmware.b
 `GET /api/state`, `GET /api/history?n=60`, `GET /api/log`, `POST /api/settings`, `POST /api/sensors`,
 `POST /api/channel {i, mode}`, `POST /api/resume`, `POST /api/bus`, `POST /api/modbus/scan`, `POST /api/modbus/setaddr`,
 `GET /api/scan[?start=1]`, `POST /api/wifi {ssid, pass}`, `POST /api/wifi/forget`, `POST /api/test-alert`,
-`POST /api/update` (multipart firmware), `POST /api/reboot`, `POST /api/factory-reset`.
+`POST /api/update` (multipart firmware), `POST /api/ota/check` (returns state with `ota`), `POST /api/ota/install`, `POST /api/reboot`, `POST /api/factory-reset`.
+Public: `/manifest.json`, `/icon-180.png`, `/icon-512.png`.
+
+With a web password set, every route above answers `401 {"error":"login required"}` without a valid `hsid` session cookie.
+Open routes: `GET /api/auth` → `{enabled, loggedIn}` and `POST /api/login {password}` (sets the cookie; `403` wrong password,
+`429` + `Retry-After` while locked out). `POST /api/logout` ends the current session.
+`POST /api/password {current, password}` sets or changes it (4-64 chars, `current` only needed once one is set), `{current, remove:true}` removes it.
+Changing or removing it ends all other sessions. `/api/state` only reports `auth.enabled`.

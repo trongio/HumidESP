@@ -4,6 +4,8 @@ static const char INDEX_HTML[] PROGMEM = R"HTML(<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HumidESP</title>
+<link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/icon-180.png"><meta name="theme-color" content="#0f1418">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="HumidESP">
 <style>
 :root{--bg:#0f1418;--card:#182027;--line:#26313a;--fg:#e6edf2;--mut:#8b9aa6;--acc:#4cc2ff;--ok:#3ccf8e;--warn:#ffb547;--bad:#ff5d6c}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -49,6 +51,8 @@ svg.room{width:100%;display:block;touch-action:none;background:#11181d;border-ra
 svg.room .drag{cursor:grab}
 .edit{border:1px dashed var(--line);border-radius:12px;padding:12px;margin-top:12px}
 #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#22303a;border:1px solid var(--line);padding:10px 16px;border-radius:10px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9}
+#login{position:fixed;inset:0;background:var(--bg);display:none;align-items:center;justify-content:center;z-index:8;padding:16px}
+#login form{width:100%;max-width:320px;display:grid;gap:12px}
 @media(max-width:520px){.hero{flex-direction:column}.grid{grid-template-columns:1fr}.hide-m{display:none}}
 </style></head><body><main>
 <header><h1>Humid<span>ESP</span></h1><div class="pill" id="net">...</div></header>
@@ -170,6 +174,15 @@ svg.room .drag{cursor:grab}
   <label class="full">Change hotspot password (leave empty to keep)<input type="password" id="apPass" minlength="8" placeholder="min 8 characters"></label>
  </div>
  <div class="row"><button class="pri" onclick="saveSettings()">Save</button><button onclick="testAlert()">Send test alert</button></div>
+ <div class="edit"><b class="sm">Web password</b> <span class="mut sm" id="pwState"></span>
+  <div class="grid">
+   <label id="pwCurL">Current password<input type="password" id="pwCur" autocomplete="current-password"></label>
+   <label>New password<input type="password" id="pwNew" autocomplete="new-password" placeholder="min 4 characters"></label>
+   <label>Repeat new password<input type="password" id="pwNew2" autocomplete="new-password"></label>
+  </div>
+  <div class="row"><button onclick="setPw()" id="pwSet">Set password</button><button class="danger" id="pwDel" onclick="setPw(true)">Remove password</button></div>
+  <div class="mut sm">Protects this page and the API. Forgot it? Hold the BOOT button on the board for 10 s.</div>
+ </div>
 </details></section>
 
 <section class="card"><details><summary>Wi-Fi</summary>
@@ -182,20 +195,40 @@ svg.room .drag{cursor:grab}
 </details></section>
 
 <section class="card"><details><summary>System</summary>
- <div class="row"><button onclick="sys('reboot')">Reboot</button><button class="danger" onclick="sys('factory-reset')">Factory reset</button></div>
+ <div class="row"><button onclick="sys('reboot')">Reboot</button><button class="danger" onclick="sys('factory-reset')">Factory reset</button><button id="logoutBtn" onclick="logout()" style="display:none">Log out</button></div>
  <div class="row"><input type="file" id="fw" accept=".bin" style="flex:1;color:var(--mut)"><button onclick="upload()" id="fwBtn">Update firmware</button></div>
  <div class="mut sm">Upload firmware.bin built by PlatformIO. Humidifiers switch off during the update.</div>
+ <div class="row"><span id="fwInfo" class="sm" style="flex:1"></span><button onclick="otaCheck()">Check for update</button><button class="pri" id="otaBtn" onclick="otaInstall()" style="display:none">Install</button></div>
+ <label class="chk"><input type="checkbox" id="autoUpdate" onchange="api('/api/settings',{autoUpdate:this.checked}).catch(e=>toast(e.message))"> Install new releases from GitHub automatically (needs home Wi-Fi)</label>
 </details></section>
 <div id="toast"></div>
 </main>
+<div id="login"><form class="card" onsubmit="login(event)"><h1>Humid<span>ESP</span></h1>
+ <label>Password<input type="password" id="lPass" autocomplete="current-password" required></label>
+ <button class="pri">Log in</button><div class="mut sm" id="lMsg"></div></form></div>
 <script>
 const $=id=>document.getElementById(id);
 const COLORS=['#4cc2ff','#3ccf8e','#ffb547','#c08bff','#ff7aa8','#7ae0e0','#e6e36a','#ff8c5a'];
 const TYPE_LBL={dht11:'DHT11',dht22:'DHT22',sht3x:'SHT3x',sht4x:'SHT4x',xymd02:'XY-MD0x',renke:'Renke',modbus:'RS485 custom'};
-let st=null,hist=null,range=60,kind='rh',tgtTimer=null,editing=false,editLayout=false,model=null,editIdx=-1;
-function toast(m){const t=$('toast');t.textContent=m;t.style.opacity=1;clearTimeout(t._h);t._h=setTimeout(()=>t.style.opacity=0,3000)}
-async function api(u,b){const r=await fetch(u,b===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
- const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||r.status);return j}
+let locked=false,st=null,hist=null,range=60,kind='rh',tgtTimer=null,editing=false,editLayout=false,model=null,editIdx=-1;
+function toast(m){if(locked)return;const t=$('toast');t.textContent=m;t.style.opacity=1;clearTimeout(t._h);t._h=setTimeout(()=>t.style.opacity=0,3000)}
+// Central 401 handling: any call without a valid session shows the login screen, polling pauses while it is up.
+async function api(u,b){if(locked)throw new Error('login required');const r=await fetch(u,b===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});
+ if(r.status==401)showLogin();const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||r.status);return j}
+function showLogin(){locked=true;$('login').style.display='flex';document.body.style.overflow='hidden';$('lPass').focus()}
+async function login(e){e.preventDefault();const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('lPass').value})}).catch(()=>null);
+ const j=r?await r.json().catch(()=>({})):{error:'offline'};if(!r||!r.ok)return $('lMsg').textContent=j.error||r.status;
+ locked=false;$('login').style.display='none';document.body.style.overflow='';$('lPass').value=$('lMsg').textContent='';start()}
+async function logout(){await api('/api/logout',{}).catch(()=>{});showLogin()}
+async function setPw(remove){const n=$('pwNew').value;if(!remove&&(n.length<4||n!=$('pwNew2').value))return toast(n.length<4?'Password needs at least 4 characters':'Passwords do not match');
+ if(remove&&!confirm('Remove the web password? Anyone on the network can then use this page.'))return;
+ try{await api('/api/password',remove?{current:$('pwCur').value,remove:true}:{current:$('pwCur').value,password:n});['pwCur','pwNew','pwNew2'].forEach(k=>$(k).value='');toast(remove?'Password removed':'Password saved');refresh()}catch(e){toast(e.message)}}
+// New firmware on the device reloads the page; new alerts beep and vibrate while the page is open.
+let fwSeen,seenA,ac;addEventListener('pointerdown',()=>ac=ac||new AudioContext(),{once:true});
+function ding(){navigator.vibrate&&navigator.vibrate([300,150,300]);if(!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=880;g.gain.value=.2;o.connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+.5)}
+function showOta(){const o=st.ota||{};$('fwInfo').innerHTML='Firmware <b>'+esc(st.fw)+'</b>'+(o.latest?' · latest '+esc(o.latest):'')+(o.error?' · <span class="mut">'+esc(o.error)+'</span>':'');$('otaBtn').style.display=o.available?'':'none';$('autoUpdate').checked=st.settings.autoUpdate}
+async function otaCheck(){try{st=await api('/api/ota/check',{});showOta();toast(st.ota.error||(st.ota.available?'Update available':'Up to date'))}catch(e){toast(e.message)}}
+async function otaInstall(){if(!confirm('Install '+st.ota.latest+'? Humidifiers stop for about a minute.'))return;try{await api('/api/ota/install',{});toast('Installing, the page reloads when done')}catch(e){toast(e.message)}}
 function dur(s){if(s<60)return s+'s';if(s<3600)return Math.floor(s/60)+'m';if(s<86400)return Math.floor(s/3600)+'h '+Math.floor(s%3600/60)+'m';return Math.floor(s/86400)+'d '+Math.floor(s%86400/3600)+'h'}
 function dew(t,h){const a=17.62,b=243.12,g=Math.log(h/100)+a*t/(b+t);return b*g/(a-g)}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -215,6 +248,8 @@ async function refresh(){
  $('arc').setAttribute('stroke',ok?rhColor(rh):'#44515c');
  $('temp').textContent=ok?st.temp.toFixed(1)+' °C':'--';$('dew').textContent=ok?dew(st.temp,rh).toFixed(1)+' °C':'--';
  $('water').textContent=st.water;$('up').textContent=dur(st.uptime);
+ if(fwSeen&&st.fw!=fwSeen)return location.reload();fwSeen=st.fw;showOta();
+ const ids=st.alerts.map(a=>a.id);if(seenA&&ids.some(i=>!seenA.includes(i)))ding();seenA=ids;document.title=(ids.length?'⚠ '+ids.length+' · ':'')+'HumidESP';
  if(!tgtTimer){$('tgt').value=s.target;$('tgtv').textContent=s.target+'%'}
  $('chs').innerHTML=st.channels.map((c,i)=>`<div class="ch"><div><span class="dot ${c.lockout?'lock':c.on?'on':''}"></span><b>${esc(c.name)}</b>
   <div class="mut sm" style="margin-left:18px">${c.lockout?'Safety stop':c.on?'Running':'Idle'} for ${dur(c.since)}</div></div>
@@ -227,6 +262,8 @@ async function refresh(){
  if(!editLayout){model={sensors:clone(st.sensors),room:clone(st.room),channels:st.channels.map(c=>({x:c.x,y:c.y}))};drawRoom()}
  $('wifiStatus').innerHTML=(w.staConnected?`Connected to <b>${esc(w.staSsid)}</b> · IP <b>${w.staIp}</b> · ${w.rssi} dBm`:w.staSsid?`Trying to connect to <b>${esc(w.staSsid)}</b>...`:'Not connected to a home network.')+
   `<br>Hotspot <b>${esc(w.apSsid)}</b> at ${w.apIp} · ${w.apClients} client(s)`;$('mdns').textContent=w.mdns;
+ const au=st.auth&&st.auth.enabled;$('pwState').textContent=au?'(on)':'(off)';$('pwSet').textContent=au?'Change password':'Set password';
+ for(const k of['pwCurL','pwDel','logoutBtn'])$(k).style.display=au?'':'none';
 }
 const NUMS=['hyst','alertLow','alertHigh','tempLow','tempHigh','spreadMax','minCycleS','maxRunMin','noRiseMin'],BOOLS=['noRiseStop','waterEnabled','waterOkWhenLow','buzzer'];
 function fillSettings(){const s=st.settings;for(const k of NUMS)$(k).value=s[k];for(const k of BOOLS)$(k).checked=s[k];$('webhook').value=s.webhook;$('aggMode').value=s.aggMode;
@@ -306,7 +343,7 @@ async function forget(){if(!confirm('Disconnect and forget the home Wi-Fi?'))ret
 async function sys(a){if(!confirm(a=='reboot'?'Reboot the controller?':'Erase all settings, sensors and Wi-Fi?'))return;await api('/api/'+a,{});toast('Restarting...')}
 
 async function upload(){const f=$('fw').files[0];if(!f)return toast('Pick firmware.bin first');const fd=new FormData();fd.append('fw',f);$('fwBtn').textContent='Uploading...';
- try{const r=await fetch('/api/update',{method:'POST',body:fd});toast(r.ok?'Updated, restarting...':'Update failed')}catch(e){toast('Upload error')}$('fwBtn').textContent='Update firmware'}
+ try{const r=await fetch('/api/update',{method:'POST',body:fd});if(r.status==401)showLogin();toast(r.ok?'Updated, restarting...':'Update failed')}catch(e){toast('Upload error')}$('fwBtn').textContent='Update firmware'}
 
 // ---------- Log + chart ----------
 async function loadLog(){try{const j=await api('/api/log');const now=Date.now();
@@ -331,5 +368,7 @@ function drawChart(){if(!st)return;const c=$('chart'),dpr=devicePixelRatio||1,W=
 document.querySelectorAll('#ranges button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#ranges button').forEach(x=>x.classList.remove('act'));b.classList.add('act');range=+b.dataset.m;drawChart()});
 document.querySelectorAll('#kind button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#kind button').forEach(x=>x.classList.remove('act'));b.classList.add('act');kind=b.dataset.k;drawChart()});
 addEventListener('resize',drawChart);
-refresh().then(()=>{loadHist();loadLog()});setInterval(()=>refresh().then(drawChart),3000);setInterval(loadHist,60000);setInterval(loadLog,5000);
+function start(){refresh().then(()=>{loadHist();loadLog()})}
+fetch('/api/auth').then(r=>r.json()).then(a=>a.loggedIn?start():showLogin()).catch(start);
+setInterval(()=>locked||refresh().then(drawChart),3000);setInterval(()=>locked||loadHist(),60000);setInterval(()=>locked||loadLog(),5000);
 </script></body></html>)HTML";

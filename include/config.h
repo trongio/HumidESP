@@ -31,6 +31,7 @@ static const int BUTTON_PINS[NUM_CHANNELS] = {32, 13};
 #define PIN_BUZZER       25   // optional active buzzer module (enable in web UI)
 #define BUZZER_ACTIVE_HIGH true // false for low-trigger modules (e.g. dac.ge AR0167)
 #define PIN_LED          2    // onboard blue LED
+#define PIN_BOOT_BUTTON  0    // onboard BOOT button: hold 10 s while running to clear the web password
 
 // ---------------------------------------------------------------------------
 // Wi-Fi access point (always on, so you can reach the UI even without router)
