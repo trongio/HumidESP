@@ -4,7 +4,7 @@ ESP32 humidity controller for an apple cold-storage room (25-30 m², 0-4 °C, 90
 It runs its own Wi-Fi hotspot with a web dashboard, reads several sensors at different
 spots and heights, switches ultrasonic humidifiers to hold a target humidity, and raises alerts.
 
-![wiring](docs/wiring.svg)
+![HumidESP system overview](docs/wiring-overview.svg)
 
 ## Features
 
@@ -52,6 +52,22 @@ Mist hitting a sensor makes it read 100 %.
 | MT3608 / XL6009 boost to 12 V | only for 10-30 V sensors like Renke RS-WS-N01 |
 | 120 Ω resistor | across A-B at the far end of the RS485 cable |
 
+### Wiring, step by step
+
+Build it in three steps and test after each one. The overview at the top shows how the parts fit together.
+
+**Step 1: desk test.** ESP32 and a DHT11 on USB, three wires, to check that the firmware and web UI work.
+
+![Step 1: ESP32 with a DHT11](docs/wiring-1-sensor-test.svg)
+
+**Step 2: power and humidifier.** The 5 V supply powers everything, and the relay switches the atomizer board's 5 V.
+
+![Step 2: power supply, relay and atomizer board](docs/wiring-2-humidifier.svg)
+
+**Step 3: cold room sensors.** An RS485 module and one CAT5 cable chain the XY-MD03 sensors inside the room.
+
+![Step 3: RS485 module and XY-MD03 sensors](docs/wiring-3-rs485-sensors.svg)
+
 ### Pins
 
 | ESP32 | Connects to |
@@ -73,7 +89,8 @@ Pins can be changed in [include/config.h](include/config.h).
 ### Atomizer board check
 
 Unplug the board's power and plug it back in. If it starts misting without a button press, the relay alone is enough.
-If it waits for a button, wire a PC817 optocoupler across the button (see the diagram) and set
+If it waits for a button, the simplest fix is to bridge the S1 button pads with a short wire (power-cycle it several times to check it starts every time).
+Otherwise wire a PC817 optocoupler across the button (see the box in the step 2 diagram) and set
 "button presses after power on" in Settings (usually 1). The relay still cuts power for a guaranteed off.
 
 ### Current budget

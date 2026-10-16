@@ -1,7 +1,7 @@
 #pragma once
 
 // ---------------------------------------------------------------------------
-// Hardware pins (ESP32-WROOM-32 DevKit, 30 pin). See docs/wiring.svg.
+// Hardware pins (ESP32-WROOM-32 DevKit, 30 pin). See docs/wiring-overview.svg.
 // ---------------------------------------------------------------------------
 #define PIN_DHT          4    // DHT11/DHT22 data (desk testing only, not for cold rooms)
 

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 840" width="1400" height="840" font-family="Arial, Helvetica, sans-serif">
+<title>HumidESP: the whole system</title>
+<rect width="1400" height="840" fill="#ffffff"/>
+<text x="40" y="56" font-size="32" font-weight="bold" fill="#1b1b1b" text-anchor="start" >HumidESP: the whole system</text>
+<text x="40" y="90" font-size="18" font-weight="normal" fill="#57606a" text-anchor="start" >What connects to what, and what goes inside the cold room.</text>
+<defs>
+<marker id="ah-v5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#d62828"/></marker>
+<marker id="ah-sig" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2b9348"/></marker>
+<marker id="ah-ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#1565c0"/></marker>
+<marker id="ah-mains" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#7a5230"/></marker>
+<marker id="ah-wifi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6d28d9"/></marker>
+</defs>
+<rect x="290" y="120" width="540" height="690" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="310" y="154" font-size="20" font-weight="bold" fill="#57606a" text-anchor="start" >OUTSIDE the cold room: electronics box</text>
+<rect x="880" y="120" width="480" height="690" rx="16" fill="#eaf4ff" stroke="#5b8fd1" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="900" y="154" font-size="20" font-weight="bold" fill="#2a5d9f" text-anchor="start" >INSIDE the cold room</text>
+<rect x="50" y="190" width="190" height="80" rx="12" fill="#fdf2e9" stroke="#7a5230" stroke-width="2.5" />
+<text x="145.0" y="236.65" font-size="19" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >230 V socket</text>
+<rect x="320" y="180" width="220" height="100" rx="12" fill="#eef0f3" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="430.0" y="226.0" font-size="19" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Power supply</text>
+<text x="430.0" y="250.0" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >5 V 5 A</text>
+<rect x="320" y="360" width="220" height="110" rx="12" fill="#e9eef5" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="430.0" y="411.0" font-size="19" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >ESP32</text>
+<text x="430.0" y="435.0" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >controller + web UI</text>
+<rect x="620" y="365" width="180" height="100" rx="12" fill="#e7f0fb" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="710.0" y="411.0" font-size="19" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Relay</text>
+<text x="710.0" y="435.0" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >IN1 on GPIO26</text>
+<rect x="320" y="590" width="220" height="100" rx="12" fill="#e8f5ee" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="430.0" y="636.0" font-size="19" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >RS485 module</text>
+<text x="430.0" y="660.0" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >TTL to RS485</text>
+<rect x="50" y="345" width="190" height="145" rx="12" fill="#f3effd" stroke="#6d28d9" stroke-width="2.5" />
+<text x="145.0" y="413.5" font-size="19" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Phone</text>
+<text x="145.0" y="437.5" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >or laptop, joins Wi-Fi</text>
+<text x="145.0" y="457.5" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >HumidESP, then opens</text>
+<text x="145.0" y="477.5" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >192.168.4.1</text>
+<rect x="920" y="300" width="400" height="190" rx="12" fill="#ffffff" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="1120" y="336" font-size="19" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Humidifier</text>
+<text x="1120" y="360" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >atomizer board JY-M22A0</text>
+<rect x="950" y="380" width="340" height="90" rx="8" fill="#d6ebff" stroke="#5b8fd1" stroke-width="2" />
+<path d="M 950 400 q 21 -10 42 0 t 42 0 t 42 0 t 42 0 t 42 0 t 42 0 t 42 0 t 46 0" stroke="#5b8fd1" stroke-width="2" fill="none"/>
+<ellipse cx="1000" cy="450" rx="24" ry="8" fill="#cfd4da" stroke="#6b7280" stroke-width="2"/>
+<ellipse cx="1080" cy="450" rx="24" ry="8" fill="#cfd4da" stroke="#6b7280" stroke-width="2"/>
+<ellipse cx="1160" cy="450" rx="24" ry="8" fill="#cfd4da" stroke="#6b7280" stroke-width="2"/>
+<ellipse cx="1240" cy="450" rx="24" ry="8" fill="#cfd4da" stroke="#6b7280" stroke-width="2"/>
+<text x="1120" y="430" font-size="15" font-weight="normal" fill="#2a5d9f" text-anchor="middle" >4 discs in a water tank</text>
+<rect x="920" y="590" width="120" height="100" rx="12" fill="#ffffff" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="980" y="632" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Sensor 1</text>
+<text x="980" y="656" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >XY-MD03</text>
+<rect x="1056" y="590" width="120" height="100" rx="12" fill="#ffffff" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="1116" y="632" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Sensor 2</text>
+<text x="1116" y="656" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >XY-MD03</text>
+<rect x="1192" y="590" width="120" height="100" rx="12" fill="#ffffff" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="1252" y="632" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Sensor 3</text>
+<text x="1252" y="656" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >XY-MD03</text>
+<text x="1120" y="726" font-size="15" font-weight="normal" fill="#2a5d9f" text-anchor="middle" >different heights and spots,</text>
+<text x="1120" y="746" font-size="15" font-weight="normal" fill="#2a5d9f" text-anchor="middle" >out of the mist</text>
+<path d="M 240 230 L 312 230" fill="none" stroke="#fff" stroke-width="13" stroke-linejoin="round"/><path d="M 240 230 L 312 230" fill="none" stroke="#7a5230" stroke-width="7" stroke-linejoin="round"  marker-end="url(#ah-mains)" />
+<path d="M 430 280 L 430 352" fill="none" stroke="#fff" stroke-width="13" stroke-linejoin="round"/><path d="M 430 280 L 430 352" fill="none" stroke="#d62828" stroke-width="7" stroke-linejoin="round"  marker-end="url(#ah-v5)" />
+<rect x="448.9995" y="304.5" width="42.001000000000005" height="27" rx="13.5" fill="#ffffff" stroke="#d62828" stroke-width="2.5" /><text x="470.0" y="323.4" font-size="15" font-weight="bold" fill="#d62828" text-anchor="middle" >5 V</text>
+<path d="M 540 215 L 710 215 L 710 357" fill="none" stroke="#fff" stroke-width="13" stroke-linejoin="round"/><path d="M 540 215 L 710 215 L 710 357" fill="none" stroke="#d62828" stroke-width="7" stroke-linejoin="round"  marker-end="url(#ah-v5)" />
+<rect x="688.9995" y="276.5" width="42.001000000000005" height="27" rx="13.5" fill="#ffffff" stroke="#d62828" stroke-width="2.5" /><text x="710.0" y="295.4" font-size="15" font-weight="bold" fill="#d62828" text-anchor="middle" >5 V</text>
+<path d="M 540 415 L 612 415" fill="none" stroke="#fff" stroke-width="13" stroke-linejoin="round"/><path d="M 540 415 L 612 415" fill="none" stroke="#2b9348" stroke-width="7" stroke-linejoin="round"  marker-end="url(#ah-sig)" />
+<rect x="544.1818" y="369.0" width="63.636400000000016" height="26" rx="13.0" fill="#ffffff" stroke="#2b9348" stroke-width="2.5" /><text x="576.0" y="387.04" font-size="14" font-weight="bold" fill="#2b9348" text-anchor="middle" >on/off</text>
+<path d="M 800 415 L 912 415" fill="none" stroke="#fff" stroke-width="13" stroke-linejoin="round"/><path d="M 800 415 L 912 415" fill="none" stroke="#d62828" stroke-width="7" stroke-linejoin="round"  marker-end="url(#ah-v5)" />
+<rect x="800.1875" y="369.0" width="109.62500000000001" height="26" rx="13.0" fill="#ffffff" stroke="#d62828" stroke-width="2.5" /><text x="855.0" y="387.04" font-size="14" font-weight="bold" fill="#d62828" text-anchor="middle" >switched 5 V</text>
+<path d="M 430 470 L 430 582" fill="none" stroke="#fff" stroke-width="13" stroke-linejoin="round"/><path d="M 430 470 L 430 582" fill="none" stroke="#2b9348" stroke-width="7" stroke-linejoin="round"  marker-end="url(#ah-sig)" marker-start="url(#ah-sig)"/>
+<rect x="365.0011" y="515.0" width="129.9978" height="26" rx="13.0" fill="#ffffff" stroke="#2b9348" stroke-width="2.5" /><text x="430.0" y="533.04" font-size="14" font-weight="bold" fill="#2b9348" text-anchor="middle" >GPIO17 / GPIO16</text>
+<path d="M 540 640 L 912 640" fill="none" stroke="#fff" stroke-width="16" stroke-linejoin="round"/><path d="M 540 640 L 912 640" fill="none" stroke="#1565c0" stroke-width="10" stroke-linejoin="round"  marker-end="url(#ah-ab)" marker-start="url(#ah-ab)"/>
+<rect x="633.81875" y="592.5" width="132.3625" height="27" rx="13.5" fill="#ffffff" stroke="#1565c0" stroke-width="2.5" /><text x="700.0" y="611.4" font-size="15" font-weight="bold" fill="#1565c0" text-anchor="middle" >one CAT5 cable</text>
+<rect x="551.0382" y="663.0" width="297.9236000000001" height="26" rx="13.0" fill="#ffffff" stroke="#1565c0" stroke-width="2.5" /><text x="700.0" y="681.04" font-size="14" font-weight="bold" fill="#1565c0" text-anchor="middle" >RS485 A / B + 5 V / GND from the PSU</text>
+<path d="M 240 415 L 312 415" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round"/><path d="M 240 415 L 312 415" fill="none" stroke="#6d28d9" stroke-width="5" stroke-linejoin="round" stroke-dasharray="9 7" marker-end="url(#ah-wifi)" marker-start="url(#ah-wifi)"/>
+<rect x="248.2264" y="435.0" width="55.5472" height="26" rx="13.0" fill="#ffffff" stroke="#6d28d9" stroke-width="2.5" /><text x="276.0" y="453.04" font-size="14" font-weight="bold" fill="#6d28d9" text-anchor="middle" >Wi-Fi</text>
+<text x="310" y="790" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >All GND connections are joined (not drawn here).</text>
+</svg>

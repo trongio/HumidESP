@@ -1,0 +1,317 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1160" width="1700" height="1160" font-family="Arial, Helvetica, sans-serif">
+<title>Step 3: RS485 sensors in the cold room</title>
+<rect width="1700" height="1160" fill="#ffffff"/>
+<text x="40" y="56" font-size="32" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Step 3: RS485 sensors in the cold room</text>
+<text x="40" y="90" font-size="18" font-weight="normal" fill="#57606a" text-anchor="start" >One CAT5 cable chains all sensors. The ESP32 stays outside the room.</text>
+<rect x="800" y="130" width="440" height="520" rx="12" fill="#eaf4ff" stroke="#5b8fd1" stroke-width="3" stroke-dasharray="12 8"/>
+<text x="820" y="166" font-size="22" font-weight="bold" fill="#2a5d9f" text-anchor="start" >COLD ROOM</text>
+<text x="820" y="190" font-size="16" font-weight="normal" fill="#2a5d9f" text-anchor="start" >0-4 °C, 90-95 %RH</text>
+<text x="784" y="636" font-size="16" font-weight="bold" fill="#57606a" text-anchor="end" >outside</text>
+<text x="816" y="636" font-size="16" font-weight="bold" fill="#2a5d9f" text-anchor="start" >inside</text>
+<rect x="40" y="790" width="760" height="250" rx="14" fill="#20262e" stroke="#0d1117" stroke-width="2" />
+<rect x="58" y="856" width="330" height="118" rx="4" fill="#c9ced6" stroke="#8a9099" stroke-width="2" />
+<rect x="58" y="856" width="70" height="118" rx="4" fill="#1f6f4a" stroke="#8a9099" stroke-width="2" />
+<path d="M 76 870 h 30 v 14 h -30 v 14 h 30 v 14 h -30 v 14 h 30 v 14 h -30" fill="none" stroke="#d4b25a" stroke-width="3"/>
+<text x="258" y="910" font-size="17" font-weight="bold" fill="#3a3f47" text-anchor="middle" >ESP32-WROOM-32</text>
+<text x="258" y="934" font-size="15" font-weight="normal" fill="#5a606a" text-anchor="middle" >(antenna end)</text>
+<rect x="460" y="886" width="70" height="58" rx="3" fill="#111" stroke="#555" stroke-width="1.5" />
+<text x="495" y="920" font-size="13" font-weight="normal" fill="#9aa" text-anchor="middle" >CH340</text>
+<rect x="690" y="860" width="34" height="28" rx="4" fill="#ddd" stroke="#888" stroke-width="1.5" />
+<text x="707" y="906" font-size="13" font-weight="normal" fill="#bbb" text-anchor="middle" >EN</text>
+<rect x="690" y="942" width="34" height="28" rx="4" fill="#ddd" stroke="#888" stroke-width="1.5" />
+<text x="707" y="935" font-size="13" font-weight="normal" fill="#bbb" text-anchor="middle" >BOOT</text>
+<text x="600" y="910" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle" >ESP32 DevKit</text>
+<text x="600" y="933" font-size="15" font-weight="normal" fill="#c9d1d9" text-anchor="middle" >30 pin</text>
+<rect x="786" y="893.0" width="46" height="44" rx="8" fill="#b8bec6" stroke="#6b7280" stroke-width="2" />
+<text x="809" y="920.0" font-size="13" font-weight="bold" fill="#374151" text-anchor="middle" >USB</text>
+<text x="110" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D23</text>
+<circle cx="110" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="110" cy="806" r="2.5" fill="#20262e"/>
+<text x="150" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D22</text>
+<circle cx="150" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="150" cy="806" r="2.5" fill="#20262e"/>
+<text x="190" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >TX0</text>
+<circle cx="190" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="190" cy="806" r="2.5" fill="#20262e"/>
+<text x="230" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >RX0</text>
+<circle cx="230" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="230" cy="806" r="2.5" fill="#20262e"/>
+<text x="270" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D21</text>
+<circle cx="270" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="270" cy="806" r="2.5" fill="#20262e"/>
+<text x="310" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D19</text>
+<circle cx="310" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="310" cy="806" r="2.5" fill="#20262e"/>
+<text x="350" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D18</text>
+<circle cx="350" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="350" cy="806" r="2.5" fill="#20262e"/>
+<text x="390" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D5</text>
+<circle cx="390" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="390" cy="806" r="2.5" fill="#20262e"/>
+<rect x="412.9995" y="819" width="34.001000000000005" height="23" rx="5" fill="#fff3a6" stroke="#2b9348" stroke-width="2.5" />
+<text x="430" y="836" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >D17</text>
+<circle cx="430" cy="806" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<rect x="452.9995" y="819" width="34.001000000000005" height="23" rx="5" fill="#fff3a6" stroke="#d9a400" stroke-width="2.5" />
+<text x="470" y="836" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >D16</text>
+<circle cx="470" cy="806" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<text x="510" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D4</text>
+<circle cx="510" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="510" cy="806" r="2.5" fill="#20262e"/>
+<text x="550" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D2</text>
+<circle cx="550" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="550" cy="806" r="2.5" fill="#20262e"/>
+<text x="590" y="836" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D15</text>
+<circle cx="590" cy="806" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="590" cy="806" r="2.5" fill="#20262e"/>
+<rect x="611.5" y="819" width="37" height="23" rx="5" fill="#fff3a6" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="630" y="836" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >GND</text>
+<circle cx="630" cy="806" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<rect x="651.5" y="819" width="37" height="23" rx="5" fill="#fff3a6" stroke="#f08c00" stroke-width="2.5" />
+<text x="670" y="836" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >3V3</text>
+<circle cx="670" cy="806" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<text x="110" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >EN</text>
+<circle cx="110" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="110" cy="1024" r="2.5" fill="#20262e"/>
+<text x="150" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VP</text>
+<circle cx="150" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="150" cy="1024" r="2.5" fill="#20262e"/>
+<text x="190" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VN</text>
+<circle cx="190" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="190" cy="1024" r="2.5" fill="#20262e"/>
+<text x="230" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D34</text>
+<circle cx="230" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="230" cy="1024" r="2.5" fill="#20262e"/>
+<text x="270" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D35</text>
+<circle cx="270" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="270" cy="1024" r="2.5" fill="#20262e"/>
+<text x="310" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D32</text>
+<circle cx="310" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="310" cy="1024" r="2.5" fill="#20262e"/>
+<text x="350" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D33</text>
+<circle cx="350" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="350" cy="1024" r="2.5" fill="#20262e"/>
+<text x="390" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D25</text>
+<circle cx="390" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="390" cy="1024" r="2.5" fill="#20262e"/>
+<text x="430" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D26</text>
+<circle cx="430" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="430" cy="1024" r="2.5" fill="#20262e"/>
+<text x="470" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D27</text>
+<circle cx="470" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="470" cy="1024" r="2.5" fill="#20262e"/>
+<text x="510" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D14</text>
+<circle cx="510" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="510" cy="1024" r="2.5" fill="#20262e"/>
+<text x="550" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D12</text>
+<circle cx="550" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="550" cy="1024" r="2.5" fill="#20262e"/>
+<text x="590" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D13</text>
+<circle cx="590" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="590" cy="1024" r="2.5" fill="#20262e"/>
+<text x="630" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >GND</text>
+<circle cx="630" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="630" cy="1024" r="2.5" fill="#20262e"/>
+<text x="670" y="1006" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VIN</text>
+<circle cx="670" cy="1024" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="670" cy="1024" r="2.5" fill="#20262e"/>
+<text x="420" y="1080" font-size="16" font-weight="normal" fill="#57606a" text-anchor="middle" >VIN and GND on the bottom row stay wired as in step 2.</text>
+<rect x="340" y="400" width="360" height="180" rx="8" fill="#1f7a4d" stroke="#145236" stroke-width="2" />
+<text x="356" y="430" font-size="18" font-weight="bold" fill="#ffffff" text-anchor="start" >TTL to RS485 module</text>
+<text x="356" y="452" font-size="15" font-weight="normal" fill="#d7f0e0" text-anchor="start" >(auto direction, 3.3 V)</text>
+<rect x="400" y="472" width="90" height="46" rx="3" fill="#111" stroke="#555" stroke-width="1.5" />
+<rect x="424" y="578" width="12" height="14" fill="#d4b25a"/>
+<text x="430" y="566" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >TXD</text>
+<rect x="464" y="578" width="12" height="14" fill="#d4b25a"/>
+<text x="470" y="566" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >RXD</text>
+<rect x="624" y="578" width="12" height="14" fill="#d4b25a"/>
+<text x="630" y="566" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >GND</text>
+<rect x="664" y="578" width="12" height="14" fill="#d4b25a"/>
+<text x="670" y="566" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >VCC</text>
+<rect x="650" y="428" width="50" height="84" rx="3" fill="#2e9e5b" stroke="#145236" stroke-width="1.5" />
+<circle cx="684" cy="450" r="8" fill="#c0c7d0" stroke="#333"/>
+<text x="640" y="456" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="end" >A+</text>
+<circle cx="684" cy="490" r="8" fill="#c0c7d0" stroke="#333"/>
+<text x="640" y="496" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="end" >B-</text>
+<text x="560" y="210" font-size="15" font-weight="normal" fill="#57606a" text-anchor="start" >from step 2:</text>
+<rect x="560" y="222" width="110" height="40" rx="6" fill="#d62828" stroke="#000" stroke-width="2" />
+<rect x="567.0" y="228" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="587.5" y="228" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="608.0" y="228" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="628.5" y="228" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="649.0" y="228" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<text x="615.0" y="256" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >5 V</text>
+<rect x="560" y="290" width="110" height="40" rx="6" fill="#2b2b2b" stroke="#000" stroke-width="2" />
+<rect x="567.0" y="296" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="587.5" y="296" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="608.0" y="296" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="628.5" y="296" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="649.0" y="296" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<text x="615.0" y="324" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >GND</text>
+<rect x="706" y="348" width="120" height="164" rx="20" fill="#9aa1aa" stroke="none" stroke-width="0" opacity="0.22"/>
+<rect x="934" y="348" width="17" height="164" rx="20" fill="#9aa1aa" stroke="none" stroke-width="0" opacity="0.22"/>
+<rect x="1059" y="348" width="17" height="164" rx="20" fill="#9aa1aa" stroke="none" stroke-width="0" opacity="0.22"/>
+<text x="752" y="536" font-size="16" font-weight="bold" fill="#57606a" text-anchor="middle" >CAT5</text>
+<text x="752" y="556" font-size="16" font-weight="bold" fill="#57606a" text-anchor="middle" >cable</text>
+<text x="880.0" y="290" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Sensor 1</text>
+<text x="880.0" y="312" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >address 1</text>
+<rect x="830" y="326" width="100" height="210" rx="10" fill="#ffffff" stroke="#6b7280" stroke-width="2" />
+<text x="880.0" y="524" font-size="14" font-weight="bold" fill="#57606a" text-anchor="middle" >XY-MD03</text>
+<rect x="871.0" y="536" width="18" height="56" rx="3" fill="#9aa1aa" stroke="#6b7280" stroke-width="1.5" />
+<rect x="867.0" y="588" width="26" height="34" rx="6" fill="#e5e7eb" stroke="#6b7280" stroke-width="1.5" />
+<text x="840" y="362" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >+</text>
+<text x="840" y="402" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >-</text>
+<text x="840" y="442" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >A</text>
+<text x="840" y="482" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >B</text>
+<text x="1005.0" y="290" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Sensor 2</text>
+<text x="1005.0" y="312" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >address 2</text>
+<rect x="955" y="326" width="100" height="210" rx="10" fill="#ffffff" stroke="#6b7280" stroke-width="2" />
+<text x="1005.0" y="524" font-size="14" font-weight="bold" fill="#57606a" text-anchor="middle" >XY-MD03</text>
+<rect x="996.0" y="536" width="18" height="56" rx="3" fill="#9aa1aa" stroke="#6b7280" stroke-width="1.5" />
+<rect x="992.0" y="588" width="26" height="34" rx="6" fill="#e5e7eb" stroke="#6b7280" stroke-width="1.5" />
+<text x="965" y="362" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >+</text>
+<text x="965" y="402" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >-</text>
+<text x="965" y="442" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >A</text>
+<text x="965" y="482" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >B</text>
+<text x="1130.0" y="290" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Sensor 3</text>
+<text x="1130.0" y="312" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >address 3</text>
+<rect x="1080" y="326" width="100" height="210" rx="10" fill="#ffffff" stroke="#6b7280" stroke-width="2" />
+<text x="1130.0" y="524" font-size="14" font-weight="bold" fill="#57606a" text-anchor="middle" >XY-MD03</text>
+<rect x="1121.0" y="536" width="18" height="56" rx="3" fill="#9aa1aa" stroke="#6b7280" stroke-width="1.5" />
+<rect x="1117.0" y="588" width="26" height="34" rx="6" fill="#e5e7eb" stroke="#6b7280" stroke-width="1.5" />
+<text x="1090" y="362" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >+</text>
+<text x="1090" y="402" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >-</text>
+<text x="1090" y="442" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >A</text>
+<text x="1090" y="482" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >B</text>
+<path d="M 670 237 L 760 237 L 760 370 L 1142 370" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 670 237 L 760 237 L 760 370 L 1142 370" fill="none" stroke="#d62828" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="670" cy="237" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<circle cx="1142" cy="370" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<path d="M 670 305 L 735 305 L 735 410 L 1142 410" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 670 305 L 735 305 L 735 410 L 1142 410" fill="none" stroke="#1b1b1b" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="670" cy="305" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<circle cx="1142" cy="410" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<path d="M 684 450 L 1142 450" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 684 450 L 1142 450" fill="none" stroke="#1565c0" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="684" cy="450" r="5.4" fill="#1565c0" stroke="#fff" stroke-width="2"/>
+<circle cx="1142" cy="450" r="5.4" fill="#1565c0" stroke="#fff" stroke-width="2"/>
+<path d="M 684 490 L 1142 490" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 684 490 L 1142 490" fill="none" stroke="#1565c0" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="684" cy="490" r="5.4" fill="#1565c0" stroke="#fff" stroke-width="2"/>
+<circle cx="1142" cy="490" r="5.4" fill="#1565c0" stroke="#fff" stroke-width="2"/>
+<line x1="696" y1="490" x2="1142" y2="490" stroke="#ffffff" stroke-width="3" stroke-dasharray="10 7"/>
+<path d="M 1142 450 L 1202 450 L 1202 456" fill="none" stroke="#ffffff" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1142 450 L 1202 450 L 1202 456" fill="none" stroke="#1565c0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 1142 490 L 1202 490 L 1202 484" fill="none" stroke="#ffffff" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1142 490 L 1202 490 L 1202 484" fill="none" stroke="#1565c0" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 1202 456 l 6 3 l -12 6 l 12 6 l -12 6 l 12 4 l -6 3" stroke="#1b1b1b" stroke-width="2.5" fill="none"/>
+<text x="1202" y="552" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >120 Ω</text>
+<circle cx="892" cy="370" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="886" y1="364" x2="898" y2="376" stroke="#333" stroke-width="2"/>
+<circle cx="892" cy="410" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="886" y1="404" x2="898" y2="416" stroke="#333" stroke-width="2"/>
+<circle cx="892" cy="450" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="886" y1="444" x2="898" y2="456" stroke="#333" stroke-width="2"/>
+<circle cx="892" cy="490" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="886" y1="484" x2="898" y2="496" stroke="#333" stroke-width="2"/>
+<circle cx="1017" cy="370" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1011" y1="364" x2="1023" y2="376" stroke="#333" stroke-width="2"/>
+<circle cx="1017" cy="410" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1011" y1="404" x2="1023" y2="416" stroke="#333" stroke-width="2"/>
+<circle cx="1017" cy="450" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1011" y1="444" x2="1023" y2="456" stroke="#333" stroke-width="2"/>
+<circle cx="1017" cy="490" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1011" y1="484" x2="1023" y2="496" stroke="#333" stroke-width="2"/>
+<circle cx="1142" cy="370" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1136" y1="364" x2="1148" y2="376" stroke="#333" stroke-width="2"/>
+<circle cx="1142" cy="410" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1136" y1="404" x2="1148" y2="416" stroke="#333" stroke-width="2"/>
+<circle cx="1142" cy="450" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1136" y1="444" x2="1148" y2="456" stroke="#333" stroke-width="2"/>
+<circle cx="1142" cy="490" r="9" fill="#c0c7d0" stroke="#333" stroke-width="1.5"/>
+<line x1="1136" y1="484" x2="1148" y2="496" stroke="#333" stroke-width="2"/>
+<rect x="860" y="700" width="380" height="195" rx="12" fill="#fff8e1" stroke="#e0b100" stroke-width="2" />
+<text x="880" y="732" font-size="18" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Before you chain them</text>
+<text x="880" y="760" font-size="16" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Every XY-MD03 ships as address 1. Wire one</text>
+<text x="880" y="781" font-size="16" font-weight="normal" fill="#1b1b1b" text-anchor="start" >sensor alone, set its address in the web UI,</text>
+<text x="880" y="802" font-size="16" font-weight="normal" fill="#1b1b1b" text-anchor="start" >put a label on it, then add the next one.</text>
+<text x="880" y="833" font-size="16" font-weight="normal" fill="#1b1b1b" text-anchor="start" >CAT5 suggestion: blue + white/blue pair for</text>
+<text x="880" y="854" font-size="16" font-weight="normal" fill="#1b1b1b" text-anchor="start" >A / B, orange + white/orange pair for 5 V /</text>
+<text x="880" y="875" font-size="16" font-weight="normal" fill="#1b1b1b" text-anchor="start" >GND.</text>
+<path d="M 430 592 L 430 806" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 430 592 L 430 806" fill="none" stroke="#2b9348" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="430" cy="592" r="5.4" fill="#2b9348" stroke="#fff" stroke-width="2"/>
+<circle cx="430" cy="806" r="5.4" fill="#2b9348" stroke="#fff" stroke-width="2"/>
+<path d="M 470 592 L 470 806" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 470 592 L 470 806" fill="none" stroke="#d9a400" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="470" cy="592" r="5.4" fill="#d9a400" stroke="#fff" stroke-width="2"/>
+<circle cx="470" cy="806" r="5.4" fill="#d9a400" stroke="#fff" stroke-width="2"/>
+<path d="M 630 592 L 630 806" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 630 592 L 630 806" fill="none" stroke="#1b1b1b" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="630" cy="592" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<circle cx="630" cy="806" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<path d="M 670 592 L 670 806" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 670 592 L 670 806" fill="none" stroke="#f08c00" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="670" cy="592" r="5.4" fill="#f08c00" stroke="#fff" stroke-width="2"/>
+<circle cx="670" cy="806" r="5.4" fill="#f08c00" stroke="#fff" stroke-width="2"/>
+<rect x="282.21439999999996" y="666.0" width="133.78560000000002" height="28" rx="14.0" fill="#ffffff" stroke="#2b9348" stroke-width="2.5" /><text x="349.1072" y="685.76" font-size="16" font-weight="bold" fill="#2b9348" text-anchor="middle" >GPIO17 to TXD</text>
+<rect x="484" y="706.0" width="133.7856" height="28" rx="14.0" fill="#ffffff" stroke="#d9a400" stroke-width="2.5" /><text x="550.8928" y="725.76" font-size="16" font-weight="bold" fill="#7a5c00" text-anchor="middle" >RXD to GPIO16</text>
+<rect x="684" y="646.0" width="60.1696" height="28" rx="14.0" fill="#ffffff" stroke="#f08c00" stroke-width="2.5" /><text x="714.0848" y="665.76" font-size="16" font-weight="bold" fill="#f08c00" text-anchor="middle" >3.3 V</text>
+<path d="M 350 806 L 350 740" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 350 806 L 350 740" fill="none" stroke="#8a8f98" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="8 6"/>
+<rect x="114.13020000000003" y="715.0" width="225.86979999999997" height="26" rx="13.0" fill="#ffffff" stroke="#8a8f98" stroke-width="2.5" /><text x="227.06510000000003" y="733.04" font-size="14" font-weight="bold" fill="#8a8f98" text-anchor="middle" >D18 = DE/RE, not needed here</text>
+<rect x="1260" y="120" width="410" height="1010" rx="14" fill="#f4f6f8" stroke="#d0d7de" stroke-width="2" />
+<text x="1284" y="162" font-size="24" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Steps</text>
+<circle cx="1300" cy="196" r="16" fill="#57606a"/>
+<text x="1300" y="202" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >1</text>
+<text x="1326" y="202" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Unplug the power.</text>
+<circle cx="1300" cy="235" r="16" fill="#f08c00"/>
+<text x="1300" y="241" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >2</text>
+<text x="1326" y="241" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Module VCC to 3V3 and GND to GND</text>
+<text x="1326" y="264" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >(the pair at the right end of the top</text>
+<text x="1326" y="287" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >row).</text>
+<circle cx="1300" cy="320" r="16" fill="#2b9348"/>
+<text x="1300" y="326" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >3</text>
+<text x="1326" y="326" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Module TXD to D17 (GPIO17), RXD to</text>
+<text x="1326" y="349" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >D16 (GPIO16).</text>
+<circle cx="1300" cy="382" r="16" fill="#57606a"/>
+<text x="1300" y="388" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >4</text>
+<text x="1326" y="388" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >All sensors ship as address 1. Connect</text>
+<text x="1326" y="411" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >ONE sensor at a time and set</text>
+<text x="1326" y="434" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >addresses 1, 2, 3 in the web UI</text>
+<text x="1326" y="457" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >(Sensors, RS485 tools).</text>
+<circle cx="1300" cy="490" r="16" fill="#1565c0"/>
+<text x="1300" y="496" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >5</text>
+<text x="1326" y="496" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Run CAT5 into the room: one twisted</text>
+<text x="1326" y="519" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >pair for A and B, another pair for 5 V</text>
+<text x="1326" y="542" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >and GND from the step 2 lever</text>
+<text x="1326" y="565" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >connectors. Chain the sensors: A to A,</text>
+<text x="1326" y="588" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >B to B, + to +, - to -.</text>
+<circle cx="1300" cy="621" r="16" fill="#1565c0"/>
+<text x="1300" y="627" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >6</text>
+<text x="1326" y="627" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Put a 120 Ω resistor across A and B at</text>
+<text x="1326" y="650" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >the last sensor.</text>
+<circle cx="1300" cy="683" r="16" fill="#57606a"/>
+<text x="1300" y="689" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >7</text>
+<text x="1326" y="689" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Power on and run the bus scan. Nothing</text>
+<text x="1326" y="712" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >found? Swap TXD and RXD. Still</text>
+<text x="1326" y="735" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >nothing? Swap A and B.</text>
+<line x1="1284" y1="780" x2="1646" y2="780" stroke="#d0d7de" stroke-width="2"/>
+<text x="1284" y="816" font-size="20" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Wire colours</text>
+<line x1="1284" y1="842" x2="1330" y2="842" stroke="#d62828" stroke-width="7" stroke-linecap="round" />
+<text x="1344" y="848" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >5 V</text>
+<line x1="1284" y1="872" x2="1330" y2="872" stroke="#1b1b1b" stroke-width="7" stroke-linecap="round" />
+<text x="1344" y="878" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >GND (ground)</text>
+<line x1="1284" y1="902" x2="1330" y2="902" stroke="#f08c00" stroke-width="7" stroke-linecap="round" />
+<text x="1344" y="908" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >3.3 V</text>
+<line x1="1284" y1="932" x2="1330" y2="932" stroke="#2b9348" stroke-width="7" stroke-linecap="round" />
+<text x="1344" y="938" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >signal (data, switching)</text>
+<line x1="1284" y1="962" x2="1330" y2="962" stroke="#d9a400" stroke-width="7" stroke-linecap="round" />
+<text x="1344" y="968" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >signal (second one)</text>
+<line x1="1284" y1="992" x2="1330" y2="992" stroke="#1565c0" stroke-width="7" stroke-linecap="round" />
+<text x="1344" y="998" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >RS485 A / B</text>
+<line x1="1284" y1="1022" x2="1330" y2="1022" stroke="#1565c0" stroke-width="7" stroke-linecap="round" />
+<line x1="1288" y1="1022" x2="1330" y2="1022" stroke="#fff" stroke-width="3" stroke-dasharray="10 7"/>
+<text x="1344" y="1028" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >RS485 B (striped)</text>
+<text x="1284" y="1068" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >Terminal names vary: + may be VCC, - may be</text>
+<text x="1284" y="1090" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >GND, A may be A+ or D+, B may be B- or D-.</text>
+</svg>

@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 860" width="1440" height="860" font-family="Arial, Helvetica, sans-serif">
+<title>Step 1: test the ESP32 with a DHT11</title>
+<rect width="1440" height="860" fill="#ffffff"/>
+<text x="40" y="56" font-size="32" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Step 1: test the ESP32 with a DHT11</text>
+<text x="40" y="90" font-size="18" font-weight="normal" fill="#57606a" text-anchor="start" >ESP32 + DHT11 on your desk, powered over USB. Three wires.</text>
+<rect x="80" y="470" width="760" height="250" rx="14" fill="#20262e" stroke="#0d1117" stroke-width="2" />
+<rect x="98" y="536" width="330" height="118" rx="4" fill="#c9ced6" stroke="#8a9099" stroke-width="2" />
+<rect x="98" y="536" width="70" height="118" rx="4" fill="#1f6f4a" stroke="#8a9099" stroke-width="2" />
+<path d="M 116 550 h 30 v 14 h -30 v 14 h 30 v 14 h -30 v 14 h 30 v 14 h -30" fill="none" stroke="#d4b25a" stroke-width="3"/>
+<text x="298" y="590" font-size="17" font-weight="bold" fill="#3a3f47" text-anchor="middle" >ESP32-WROOM-32</text>
+<text x="298" y="614" font-size="15" font-weight="normal" fill="#5a606a" text-anchor="middle" >(antenna end)</text>
+<rect x="500" y="566" width="70" height="58" rx="3" fill="#111" stroke="#555" stroke-width="1.5" />
+<text x="535" y="600" font-size="13" font-weight="normal" fill="#9aa" text-anchor="middle" >CH340</text>
+<rect x="730" y="540" width="34" height="28" rx="4" fill="#ddd" stroke="#888" stroke-width="1.5" />
+<text x="747" y="586" font-size="13" font-weight="normal" fill="#bbb" text-anchor="middle" >EN</text>
+<rect x="730" y="622" width="34" height="28" rx="4" fill="#ddd" stroke="#888" stroke-width="1.5" />
+<text x="747" y="615" font-size="13" font-weight="normal" fill="#bbb" text-anchor="middle" >BOOT</text>
+<text x="640" y="590" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle" >ESP32 DevKit</text>
+<text x="640" y="613" font-size="15" font-weight="normal" fill="#c9d1d9" text-anchor="middle" >30 pin</text>
+<rect x="826" y="573.0" width="46" height="44" rx="8" fill="#b8bec6" stroke="#6b7280" stroke-width="2" />
+<text x="849" y="600.0" font-size="13" font-weight="bold" fill="#374151" text-anchor="middle" >USB</text>
+<text x="150" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D23</text>
+<circle cx="150" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="150" cy="486" r="2.5" fill="#20262e"/>
+<text x="190" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D22</text>
+<circle cx="190" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="190" cy="486" r="2.5" fill="#20262e"/>
+<text x="230" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >TX0</text>
+<circle cx="230" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="230" cy="486" r="2.5" fill="#20262e"/>
+<text x="270" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >RX0</text>
+<circle cx="270" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="270" cy="486" r="2.5" fill="#20262e"/>
+<text x="310" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D21</text>
+<circle cx="310" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="310" cy="486" r="2.5" fill="#20262e"/>
+<text x="350" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D19</text>
+<circle cx="350" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="350" cy="486" r="2.5" fill="#20262e"/>
+<text x="390" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D18</text>
+<circle cx="390" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="390" cy="486" r="2.5" fill="#20262e"/>
+<text x="430" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D5</text>
+<circle cx="430" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="430" cy="486" r="2.5" fill="#20262e"/>
+<text x="470" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D17</text>
+<circle cx="470" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="470" cy="486" r="2.5" fill="#20262e"/>
+<text x="510" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D16</text>
+<circle cx="510" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="510" cy="486" r="2.5" fill="#20262e"/>
+<rect x="535.407" y="499" width="29.186000000000003" height="23" rx="5" fill="#fff3a6" stroke="#2b9348" stroke-width="2.5" />
+<text x="550" y="516" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >D4</text>
+<circle cx="550" cy="486" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<text x="590" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D2</text>
+<circle cx="590" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="590" cy="486" r="2.5" fill="#20262e"/>
+<text x="630" y="516" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D15</text>
+<circle cx="630" cy="486" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="630" cy="486" r="2.5" fill="#20262e"/>
+<rect x="651.5" y="499" width="37" height="23" rx="5" fill="#fff3a6" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="670" y="516" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >GND</text>
+<circle cx="670" cy="486" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<rect x="691.5" y="499" width="37" height="23" rx="5" fill="#fff3a6" stroke="#f08c00" stroke-width="2.5" />
+<text x="710" y="516" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >3V3</text>
+<circle cx="710" cy="486" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<text x="150" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >EN</text>
+<circle cx="150" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="150" cy="704" r="2.5" fill="#20262e"/>
+<text x="190" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VP</text>
+<circle cx="190" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="190" cy="704" r="2.5" fill="#20262e"/>
+<text x="230" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VN</text>
+<circle cx="230" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="230" cy="704" r="2.5" fill="#20262e"/>
+<text x="270" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D34</text>
+<circle cx="270" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="270" cy="704" r="2.5" fill="#20262e"/>
+<text x="310" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D35</text>
+<circle cx="310" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="310" cy="704" r="2.5" fill="#20262e"/>
+<text x="350" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D32</text>
+<circle cx="350" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="350" cy="704" r="2.5" fill="#20262e"/>
+<text x="390" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D33</text>
+<circle cx="390" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="390" cy="704" r="2.5" fill="#20262e"/>
+<text x="430" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D25</text>
+<circle cx="430" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="430" cy="704" r="2.5" fill="#20262e"/>
+<text x="470" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D26</text>
+<circle cx="470" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="470" cy="704" r="2.5" fill="#20262e"/>
+<text x="510" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D27</text>
+<circle cx="510" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="510" cy="704" r="2.5" fill="#20262e"/>
+<text x="550" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D14</text>
+<circle cx="550" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="550" cy="704" r="2.5" fill="#20262e"/>
+<text x="590" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D12</text>
+<circle cx="590" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="590" cy="704" r="2.5" fill="#20262e"/>
+<text x="630" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D13</text>
+<circle cx="630" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="630" cy="704" r="2.5" fill="#20262e"/>
+<text x="670" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >GND</text>
+<circle cx="670" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="670" cy="704" r="2.5" fill="#20262e"/>
+<text x="710" y="686" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VIN</text>
+<circle cx="710" cy="704" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="710" cy="704" r="2.5" fill="#20262e"/>
+<text x="600" y="132" font-size="22" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >DHT11 module</text>
+<rect x="470" y="145" width="260" height="170" rx="8" fill="#1e5aa8" stroke="#0f3a70" stroke-width="2" />
+<rect x="530" y="158" width="140" height="100" rx="6" fill="#5aa0e6" stroke="#2c6cb0" stroke-width="2" />
+<rect x="542" y="168" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="562" y="168" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="582" y="168" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="602" y="168" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="622" y="168" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="642" y="168" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="542" y="190" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="562" y="190" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="582" y="190" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="602" y="190" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="622" y="190" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="642" y="190" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="542" y="212" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="562" y="212" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="582" y="212" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="602" y="212" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="622" y="212" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="642" y="212" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="542" y="234" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="562" y="234" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="582" y="234" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="602" y="234" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="622" y="234" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="642" y="234" width="12" height="12" rx="2" fill="#2c6cb0"/>
+<rect x="544" y="315" width="12" height="15" fill="#d4b25a"/>
+<text x="550" y="298" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" >S</text>
+<rect x="604" y="315" width="12" height="15" fill="#d4b25a"/>
+<text x="610" y="298" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" >+</text>
+<rect x="664" y="315" width="12" height="15" fill="#d4b25a"/>
+<text x="670" y="298" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle" >-</text>
+<path d="M 550 330 L 550 486" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 550 330 L 550 486" fill="none" stroke="#2b9348" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="550" cy="330" r="5.4" fill="#2b9348" stroke="#fff" stroke-width="2"/>
+<circle cx="550" cy="486" r="5.4" fill="#2b9348" stroke="#fff" stroke-width="2"/>
+<path d="M 670 330 L 670 486" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 670 330 L 670 486" fill="none" stroke="#1b1b1b" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="670" cy="330" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<circle cx="670" cy="486" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<path d="M 610 330 L 610 380 L 660 380 A 10 10 0 0 1 680 380 L 710 380 L 710 486" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 610 330 L 610 380 L 660 380 A 10 10 0 0 1 680 380 L 710 380 L 710 486" fill="none" stroke="#f08c00" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="610" cy="330" r="5.4" fill="#f08c00" stroke="#fff" stroke-width="2"/>
+<circle cx="710" cy="486" r="5.4" fill="#f08c00" stroke="#fff" stroke-width="2"/>
+<rect x="417.96479999999997" y="416.0" width="118.03520000000002" height="28" rx="14.0" fill="#ffffff" stroke="#2b9348" stroke-width="2.5" /><text x="476.9824" y="435.76" font-size="16" font-weight="bold" fill="#2b9348" text-anchor="middle" >GPIO4 (data)</text>
+<rect x="728" y="416.0" width="60.1696" height="28" rx="14.0" fill="#ffffff" stroke="#f08c00" stroke-width="2.5" /><text x="758.0848" y="435.76" font-size="16" font-weight="bold" fill="#f08c00" text-anchor="middle" >3.3 V</text>
+<rect x="606.1024" y="416.0" width="49.897600000000004" height="28" rx="14.0" fill="#ffffff" stroke="#1b1b1b" stroke-width="2.5" /><text x="631.0512" y="435.76" font-size="16" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >GND</text>
+<text x="60" y="180" font-size="17" font-weight="normal" fill="#57606a" text-anchor="start" >Pin order differs between modules. Follow the</text>
+<text x="60" y="204" font-size="17" font-weight="normal" fill="#57606a" text-anchor="start" >letters printed on yours: S can be DAT or OUT,</text>
+<text x="60" y="228" font-size="17" font-weight="normal" fill="#57606a" text-anchor="start" >+ can be VCC, - can be GND.</text>
+<path d="M 872 595 H 940" stroke="#4b5563" stroke-width="12" stroke-linecap="round" fill="none"/>
+<text x="930" y="639" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="middle" >USB cable to</text>
+<text x="930" y="661" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="middle" >your computer</text>
+<text x="930" y="683" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >(power + upload)</text>
+<rect x="60" y="760" width="880" height="70" rx="10" fill="#fff8e1" stroke="#e0b100" stroke-width="2" />
+<text x="80" y="790" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Desk test only.</text>
+<text x="80" y="815" font-size="16" font-weight="normal" fill="#1b1b1b" text-anchor="start" >The DHT11 does not survive a cold room (rated 0-50 °C, 20-90 %RH). Step 3 adds the real sensors.</text>
+<rect x="1000" y="120" width="410" height="710" rx="14" fill="#f4f6f8" stroke="#d0d7de" stroke-width="2" />
+<text x="1024" y="162" font-size="24" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Steps</text>
+<circle cx="1040" cy="196" r="16" fill="#57606a"/>
+<text x="1040" y="202" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >1</text>
+<text x="1066" y="202" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Unplug the USB cable while you wire.</text>
+<circle cx="1040" cy="235" r="16" fill="#2b9348"/>
+<text x="1040" y="241" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >2</text>
+<text x="1066" y="241" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >DHT11 S (DAT) to D4. D4 is GPIO4.</text>
+<circle cx="1040" cy="274" r="16" fill="#f08c00"/>
+<text x="1040" y="280" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >3</text>
+<text x="1066" y="280" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >DHT11 + (VCC) to 3V3.</text>
+<circle cx="1040" cy="313" r="16" fill="#1b1b1b"/>
+<text x="1040" y="319" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >4</text>
+<text x="1066" y="319" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >DHT11 - (GND) to GND, the pin right</text>
+<text x="1066" y="342" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >next to 3V3.</text>
+<circle cx="1040" cy="375" r="16" fill="#57606a"/>
+<text x="1040" y="381" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >5</text>
+<text x="1066" y="381" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Plug in USB and flash the firmware:</text>
+<text x="1066" y="404" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >pio run -t upload</text>
+<circle cx="1040" cy="437" r="16" fill="#57606a"/>
+<text x="1040" y="443" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >6</text>
+<text x="1066" y="443" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Join the Wi-Fi HumidESP (password</text>
+<text x="1066" y="466" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >humidesp123) and open 192.168.4.1.</text>
+<text x="1066" y="489" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >"Desk DHT11" shows a reading after a</text>
+<text x="1066" y="512" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >few seconds.</text>
+<line x1="1024" y1="557" x2="1386" y2="557" stroke="#d0d7de" stroke-width="2"/>
+<text x="1024" y="593" font-size="20" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Wire colours</text>
+<line x1="1024" y1="619" x2="1070" y2="619" stroke="#d62828" stroke-width="7" stroke-linecap="round" />
+<text x="1084" y="625" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >5 V</text>
+<line x1="1024" y1="649" x2="1070" y2="649" stroke="#1b1b1b" stroke-width="7" stroke-linecap="round" />
+<text x="1084" y="655" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >GND (ground)</text>
+<line x1="1024" y1="679" x2="1070" y2="679" stroke="#f08c00" stroke-width="7" stroke-linecap="round" />
+<text x="1084" y="685" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >3.3 V</text>
+<line x1="1024" y1="709" x2="1070" y2="709" stroke="#2b9348" stroke-width="7" stroke-linecap="round" />
+<text x="1084" y="715" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >signal (data, switching)</text>
+<line x1="1024" y1="739" x2="1070" y2="739" stroke="#d9a400" stroke-width="7" stroke-linecap="round" />
+<text x="1084" y="745" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >signal (second one)</text>
+<line x1="1024" y1="769" x2="1070" y2="769" stroke="#1565c0" stroke-width="7" stroke-linecap="round" />
+<text x="1084" y="775" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >RS485 A / B</text>
+<text x="1024" y="815" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >A small hump means two wires cross without</text>
+<text x="1024" y="837" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >touching.</text>
+</svg>
