@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HumidESP Parts</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>.qr img,.qr canvas{width:96px;height:96px;image-rendering:pixelated}</style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+<main class="max-w-5xl mx-auto px-4 py-8">
+  <header class="mb-8">
+    <h1 class="text-3xl font-bold">HumidESP <span class="text-sky-400">parts list</span></h1>
+    <p class="text-slate-400 mt-2">For a 25-30 m² apple cold room (0-4 °C, 90-95 %RH). Links checked on 2026-10-16. Prices are approximate.
+      Scan a QR code to open the link on your phone.</p>
+    <p class="text-slate-500 text-sm mt-1">AliExpress links use aliexpress.ru, because aliexpress.com redirects there from Georgia. dac.ge product pages are <code>dac.ge/en/?product=ID</code>.</p>
+  </header>
+
+  <section id="list" class="space-y-10"></section>
+
+  <section class="mt-12 rounded-2xl border border-slate-800 bg-slate-900 p-5 text-sm text-slate-300 space-y-2">
+    <h2 class="text-lg font-semibold text-slate-100">Notes</h2>
+    <p><b>Why not the DHT11?</b> It is rated 0-50 °C and 20-90 %RH (±5 %), so it can't measure a cold room near saturation. Keep it for desk testing.</p>
+    <p><b>Why XY-MD03 and not XY-MD02?</b> The classic XY-MD02 uses an SHT20, and its manual rates it to 0-80 %RH. The XY-MD03 uses an SHT40 (0-100 %RH) on a waterproof probe and runs on 5 V.</p>
+    <p><b>Before wiring them together:</b> every sensor ships as address 1. Connect them one at a time and set addresses 1, 2, 3... in the web UI (Sensors → RS485 / Modbus tools).</p>
+    <p><b>Small parts with no link:</b> a 120 Ω resistor (for the far end of the RS485 cable), a PC817 optocoupler and 330 Ω resistor (only if the atomizer board needs a button press), wire, and heat shrink.</p>
+    <p><b>Water:</b> use demineralised or RO water in the ultrasonic misters, otherwise white mineral dust settles on the apples. Buy it locally.</p>
+  </section>
+</main>
+
+<script>
+const ITEMS = [
+  {group: 'Must have', items: [
+    {name: 'XY-MD03 RS485 Modbus temp/humidity probe (SHT40)', qty: '3-4 pcs', price: '~13-18 GEL each',
+     why: 'For the room itself. 0-100 %RH, -40 to 80 °C, waterproof probe on 1 m cable, 5-28 V. Daisy-chains on one cable. Firmware type: "XY-MD03 / XY-MD02".',
+     links: [
+       ['AliExpress item (metal or plastic probe)', 'https://aliexpress.ru/item/1005006124552708.html'],
+       ['AliExpress item (alternative seller)', 'https://aliexpress.ru/item/1005006221560672.html'],
+       ['AliExpress search: xy-md03', 'https://aliexpress.ru/wholesale?SearchText=xy-md03'],
+       ['Datasheet / register map', 'https://attach01.oss-us-west-1.aliyuncs.com/IC/Datasheet/GY21249.pdf'],
+     ]},
+    {name: 'TTL to RS485 converter', qty: '1 pc', price: '9 GEL / ~1 GEL',
+     why: 'Connects the ESP32 (GPIO16/17) to the sensor cable. Pick a 3.3 V-capable automatic-direction module.',
+     links: [
+       ['dac.ge AR0405 (3-30 V)', 'https://dac.ge/en/?product=46129'],
+       ['AliExpress auto flow control module', 'https://aliexpress.ru/item/1005004511376804.html'],
+       ['AliExpress search', 'https://aliexpress.ru/wholesale?SearchText=TTL%20to%20RS485%20automatic%20flow%20control'],
+     ]},
+    {name: 'Relay module 5 V, high/low trigger', qty: '1-2 pcs', price: '4.8 GEL',
+     why: 'Switches the atomizer board\'s 5 V input. Set the jumper to H. Skip if your red relay boards have the H/L jumper.',
+     links: [
+       ['dac.ge AR0311 1-channel', 'https://dac.ge/en/?product=5629'],
+       ['dac.ge AR0310 (screw terminals)', 'https://dac.ge/en/?product=45782'],
+       ['dac.ge AR0312 2-channel', 'https://dac.ge/en/?product=5631'],
+     ]},
+    {name: 'Sealed enclosure', qty: '1 pc', price: '18-44 GEL',
+     why: 'Holds the ESP32, PSU, relay and RS485 module. Mount it outside the cold room if you can, so only the sensor cable goes inside.',
+     links: [
+       ['dac.ge Z46A 73×142×195 mm', 'https://dac.ge/en/?product=4972'],
+       ['dac.ge Z90 80×170×220 mm', 'https://dac.ge/en/?product=4981'],
+       ['AliExpress IP67 ABS box', 'https://aliexpress.ru/item/4000287507400.html'],
+     ]},
+    {name: 'Cable glands PG7 / PG9', qty: '1 set', price: 'few GEL',
+     why: 'Seal where cables enter the box. dac.ge doesn\'t stock them.',
+     links: [
+       ['AliExpress nylon IP68 glands', 'https://aliexpress.ru/item/1005012013946264.html'],
+       ['AliExpress search', 'https://aliexpress.ru/wholesale?SearchText=cable%20gland%20waterproof%20PG7'],
+     ]},
+    {name: 'Sensor cable (CAT5E or shielded twisted pair)', qty: 'room length + 5 m', price: '1 GEL/m',
+     why: 'One twisted pair for RS485 A/B, another pair for 5 V and GND.',
+     links: [
+       ['dac.ge CAT5E UTP', 'https://dac.ge/en/?product=48619'],
+       ['AliExpress shielded RS485 cable', 'https://aliexpress.ru/item/1005010456519871.html'],
+     ]},
+  ]},
+  {group: 'Optional', items: [
+    {name: 'Bigger mist maker 24 V', qty: '1 pc', price: '27 GEL',
+     why: 'The 4 small discs may struggle against the cooler, which keeps drying the air. This one does 250-450 ml/h. Needs its own 24 V supply, switched by the same relay.',
+     links: [
+       ['dac.ge AR0187 24 V 19 W', 'https://dac.ge/en/?product=47557'],
+       ['AliExpress 10-head 24 V industrial', 'https://aliexpress.ru/item/1005013276573532.html'],
+     ]},
+    {name: 'Spare atomizer discs', qty: 'a few', price: 'cheap',
+     why: 'They wear out, especially with hard water.',
+     links: [
+       ['dac.ge 20 mm disc', 'https://dac.ge/en/?product=45654'],
+       ['dac.ge 25 mm disc', 'https://dac.ge/en/?product=45655'],
+     ]},
+    {name: 'Float switch (stainless)', qty: '1 pc', price: 'few GEL',
+     why: 'Stops the humidifiers when the water runs low (GPIO33). Avoid resistive PCB water sensors: they corrode.',
+     links: [
+       ['AliExpress float switch', 'https://aliexpress.ru/item/33004754249.html'],
+     ]},
+    {name: 'Active buzzer module', qty: '1 pc', price: '2.4 GEL',
+     why: 'Beeps on alerts (GPIO25). The dac.ge module is low-trigger: set BUZZER_ACTIVE_HIGH false in config.h.',
+     links: [
+       ['dac.ge AR0167', 'https://dac.ge/en/?product=48985'],
+     ]},
+    {name: 'MOSFET switch module (silent relay alternative)', qty: '1-2 pcs', price: '4 GEL',
+     why: 'No clicking and no contact wear. Switches the low side (GND) of the atomizer board.',
+     links: [
+       ['dac.ge AR0350 isolated MOSFET', 'https://dac.ge/en/?product=47465'],
+       ['AliExpress D4184 module', 'https://aliexpress.ru/item/1005002626970800.html'],
+     ]},
+    {name: 'Adafruit SHT45 with PTFE membrane (I2C)', qty: 'if wanted', price: '$13.50',
+     why: 'Very accurate, but I2C only works over short cables (1-2 m). Good for a sensor right next to the box. Firmware type: "SHT40/41/45".',
+     links: [
+       ['Adafruit 6174', 'https://www.adafruit.com/product/6174'],
+     ]},
+    {name: 'Renke RS-WS-N01 long probe (stainless mesh)', qty: 'alternative', price: '$17',
+     why: 'Industrial alternative to the XY-MD03. Needs 10-30 V (add the boost converter below) and uses 4800 baud by default.',
+     links: [
+       ['Renke product page', 'https://www.renkeer.com/product/long-temperature-and-humidity-probe/'],
+     ]},
+    {name: 'Boost converter 5 V to 12 V', qty: 'only for Renke', price: '3.9 GEL',
+     why: 'Not needed for XY-MD03 sensors.',
+     links: [
+       ['dac.ge 139 A (MT3608 size)', 'https://dac.ge/en/?product=5701'],
+       ['dac.ge 1393 (3 A)', 'https://dac.ge/en/?product=6142'],
+     ]},
+  ]},
+];
+
+const host = u => new URL(u).hostname.replace(/^www\./, '');
+const badge = u => {
+  const h = host(u);
+  if (h.includes('dac.ge')) return 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/30';
+  if (h.includes('aliexpress')) return 'bg-orange-500/15 text-orange-300 ring-orange-500/30';
+  return 'bg-sky-500/15 text-sky-300 ring-sky-500/30';
+};
+const esc = s => s.replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+
+const list = document.getElementById('list');
+let n = 0;
+for (const g of ITEMS) {
+  const sec = document.createElement('div');
+  sec.innerHTML = `<h2 class="text-xl font-semibold mb-4">${g.group}</h2><div class="grid gap-4"></div>`;
+  const grid = sec.lastElementChild;
+  for (const it of g.items) {
+    const card = document.createElement('article');
+    card.className = 'rounded-2xl border border-slate-800 bg-slate-900 p-5';
+    card.innerHTML = `
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h3 class="text-lg font-semibold">${esc(it.name)}</h3>
+        <div class="text-sm text-slate-400">${esc(it.qty)} · ${esc(it.price)}</div>
+      </div>
+      <p class="text-slate-400 text-sm mt-1">${esc(it.why)}</p>
+      <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>`;
+    const links = card.lastElementChild;
+    for (const [label, url] of it.links) {
+      const id = 'qr' + (n++);
+      const a = document.createElement('a');
+      a.href = url; a.target = '_blank'; a.rel = 'noopener';
+      a.className = 'group flex flex-col items-center gap-2 rounded-xl bg-slate-950/60 p-3 ring-1 ring-slate-800 hover:ring-sky-500 transition';
+      a.innerHTML = `<div id="${id}" class="qr rounded-lg bg-white p-1.5"></div>
+        <span class="text-xs text-center text-slate-200 group-hover:text-sky-300">${esc(label)}</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full ring-1 ${badge(url)}">${host(url)}</span>`;
+      links.appendChild(a);
+      requestAnimationFrame(() => new QRCode(document.getElementById(id), {text: url, width: 192, height: 192, correctLevel: QRCode.CorrectLevel.M}));
+    }
+    grid.appendChild(card);
+  }
+  list.appendChild(sec);
+}
+</script>
+</body>
+</html>
