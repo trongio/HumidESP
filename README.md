@@ -71,6 +71,10 @@ Build it in three steps and test after each one. The overview at the top shows h
 
 ![Step 3: RS485 module and XY-MD03 sensors](docs/wiring-3-rs485-sensors.svg)
 
+**Step 4: 24 V foggers (bigger rooms).** Optional, instead of step 2's atomizer. For a 75-90 m³ room, use three single-head 24 V ultrasonic foggers in one water tank. Each keeps its own adapter plugged in; only the + wire of each DC cable is cut and run through the relay (adapter end to COM, head end to NO). Channel 1 (GPIO26) switches heads 1 and 2, channel 2 (GPIO27) switches head 3. A small fridge needs just one head on channel 1.
+
+![Step 4: 24 V ultrasonic foggers on the 2 channel relay](docs/wiring-4-24v-foggers.svg)
+
 ### Pins
 
 | ESP32 | Connects to |
@@ -135,6 +139,7 @@ Downloads are verified with GitHub's root certificates (`include/github_ca.h`).
 ## Cold-room tips
 
 Cleaning schedule, calibration and troubleshooting: [docs/MAINTENANCE.md](docs/MAINTENANCE.md).
+How many humidifiers, how much power and water, and the budget for your room size: [docs/SIZING.md](docs/SIZING.md) (calculator at the top of [docs/shopping.html](docs/shopping.html)).
 
 - Use **demineralised / RO water** in ultrasonic humidifiers, otherwise white mineral dust settles on the fruit and equipment.
 - Mist should evaporate before it lands on apples. Aim it into the airflow from the cooler fan, not at the crates.

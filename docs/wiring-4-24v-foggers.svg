@@ -1,0 +1,435 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1720 1990" width="1720" height="1990" font-family="Arial, Helvetica, sans-serif">
+<title>Step 4: 24 V ultrasonic foggers (bigger rooms)</title>
+<rect width="1720" height="1990" fill="#ffffff"/>
+<text x="40" y="56" font-size="32" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Step 4: 24 V ultrasonic foggers (bigger rooms)</text>
+<text x="40" y="90" font-size="18" font-weight="normal" fill="#57606a" text-anchor="start" >For a 75-90 m³ cold room: 3 single-head 24 V foggers, each with its own adapter, switched by the 2 channel relay.</text>
+<rect x="60" y="130" width="760" height="250" rx="14" fill="#20262e" stroke="#0d1117" stroke-width="2" />
+<rect x="78" y="196" width="330" height="118" rx="4" fill="#c9ced6" stroke="#8a9099" stroke-width="2" />
+<rect x="78" y="196" width="70" height="118" rx="4" fill="#1f6f4a" stroke="#8a9099" stroke-width="2" />
+<path d="M 96 210 h 30 v 14 h -30 v 14 h 30 v 14 h -30 v 14 h 30 v 14 h -30" fill="none" stroke="#d4b25a" stroke-width="3"/>
+<text x="278" y="250" font-size="17" font-weight="bold" fill="#3a3f47" text-anchor="middle" >ESP32-WROOM-32</text>
+<text x="278" y="274" font-size="15" font-weight="normal" fill="#5a606a" text-anchor="middle" >(antenna end)</text>
+<rect x="480" y="226" width="70" height="58" rx="3" fill="#111" stroke="#555" stroke-width="1.5" />
+<text x="515" y="260" font-size="13" font-weight="normal" fill="#9aa" text-anchor="middle" >CH340</text>
+<rect x="710" y="200" width="34" height="28" rx="4" fill="#ddd" stroke="#888" stroke-width="1.5" />
+<text x="727" y="246" font-size="13" font-weight="normal" fill="#bbb" text-anchor="middle" >EN</text>
+<rect x="710" y="282" width="34" height="28" rx="4" fill="#ddd" stroke="#888" stroke-width="1.5" />
+<text x="727" y="275" font-size="13" font-weight="normal" fill="#bbb" text-anchor="middle" >BOOT</text>
+<text x="620" y="250" font-size="17" font-weight="bold" fill="#ffffff" text-anchor="middle" >ESP32 DevKit</text>
+<text x="620" y="273" font-size="15" font-weight="normal" fill="#c9d1d9" text-anchor="middle" >30 pin</text>
+<rect x="806" y="233.0" width="46" height="44" rx="8" fill="#b8bec6" stroke="#6b7280" stroke-width="2" />
+<text x="829" y="260.0" font-size="13" font-weight="bold" fill="#374151" text-anchor="middle" >USB</text>
+<text x="130" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D23</text>
+<circle cx="130" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="130" cy="146" r="2.5" fill="#20262e"/>
+<text x="170" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D22</text>
+<circle cx="170" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="170" cy="146" r="2.5" fill="#20262e"/>
+<text x="210" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >TX0</text>
+<circle cx="210" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="210" cy="146" r="2.5" fill="#20262e"/>
+<text x="250" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >RX0</text>
+<circle cx="250" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="250" cy="146" r="2.5" fill="#20262e"/>
+<text x="290" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D21</text>
+<circle cx="290" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="290" cy="146" r="2.5" fill="#20262e"/>
+<text x="330" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D19</text>
+<circle cx="330" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="330" cy="146" r="2.5" fill="#20262e"/>
+<text x="370" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D18</text>
+<circle cx="370" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="370" cy="146" r="2.5" fill="#20262e"/>
+<text x="410" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D5</text>
+<circle cx="410" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="410" cy="146" r="2.5" fill="#20262e"/>
+<text x="450" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D17</text>
+<circle cx="450" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="450" cy="146" r="2.5" fill="#20262e"/>
+<text x="490" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D16</text>
+<circle cx="490" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="490" cy="146" r="2.5" fill="#20262e"/>
+<text x="530" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D4</text>
+<circle cx="530" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="530" cy="146" r="2.5" fill="#20262e"/>
+<text x="570" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D2</text>
+<circle cx="570" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="570" cy="146" r="2.5" fill="#20262e"/>
+<text x="610" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D15</text>
+<circle cx="610" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="610" cy="146" r="2.5" fill="#20262e"/>
+<text x="650" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >GND</text>
+<circle cx="650" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="650" cy="146" r="2.5" fill="#20262e"/>
+<text x="690" y="176" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >3V3</text>
+<circle cx="690" cy="146" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="690" cy="146" r="2.5" fill="#20262e"/>
+<text x="130" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >EN</text>
+<circle cx="130" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="130" cy="364" r="2.5" fill="#20262e"/>
+<text x="170" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VP</text>
+<circle cx="170" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="170" cy="364" r="2.5" fill="#20262e"/>
+<text x="210" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >VN</text>
+<circle cx="210" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="210" cy="364" r="2.5" fill="#20262e"/>
+<text x="250" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D34</text>
+<circle cx="250" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="250" cy="364" r="2.5" fill="#20262e"/>
+<text x="290" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D35</text>
+<circle cx="290" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="290" cy="364" r="2.5" fill="#20262e"/>
+<text x="330" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D32</text>
+<circle cx="330" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="330" cy="364" r="2.5" fill="#20262e"/>
+<text x="370" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D33</text>
+<circle cx="370" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="370" cy="364" r="2.5" fill="#20262e"/>
+<text x="410" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D25</text>
+<circle cx="410" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="410" cy="364" r="2.5" fill="#20262e"/>
+<rect x="431.5" y="329" width="37" height="23" rx="5" fill="#fff3a6" stroke="#2b9348" stroke-width="2.5" />
+<text x="450" y="346" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >D26</text>
+<circle cx="450" cy="364" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<rect x="471.5" y="329" width="37" height="23" rx="5" fill="#fff3a6" stroke="#d9a400" stroke-width="2.5" />
+<text x="490" y="346" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >D27</text>
+<circle cx="490" cy="364" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<text x="530" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D14</text>
+<circle cx="530" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="530" cy="364" r="2.5" fill="#20262e"/>
+<text x="570" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D12</text>
+<circle cx="570" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="570" cy="364" r="2.5" fill="#20262e"/>
+<text x="610" y="346" font-size="15" font-weight="normal" fill="#8b949e" text-anchor="middle" >D13</text>
+<circle cx="610" cy="364" r="7" fill="#9a8a52" stroke="#3b3b3b" stroke-width="1.5"/>
+<circle cx="610" cy="364" r="2.5" fill="#20262e"/>
+<rect x="631.5" y="329" width="37" height="23" rx="5" fill="#fff3a6" stroke="#1b1b1b" stroke-width="2.5" />
+<text x="650" y="346" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >GND</text>
+<circle cx="650" cy="364" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<rect x="672.9995" y="329" width="34.001000000000005" height="23" rx="5" fill="#fff3a6" stroke="#d62828" stroke-width="2.5" />
+<text x="690" y="346" font-size="15" font-weight="bold" fill="#111" text-anchor="middle" >VIN</text>
+<circle cx="690" cy="364" r="9" fill="#e6c35c" stroke="#fff" stroke-width="2"/>
+<rect x="570" y="440" width="130" height="40" rx="6" fill="#2b2b2b" stroke="#000" stroke-width="2" />
+<rect x="577.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="602.5" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="628.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="653.5" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="679.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<text x="635.0" y="474" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >GND</text>
+<rect x="780" y="440" width="120" height="40" rx="6" fill="#d62828" stroke="#000" stroke-width="2" />
+<rect x="787.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="810.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="833.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="856.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<rect x="879.0" y="446" width="14" height="10" rx="2" fill="#f2f2f2" opacity="0.85"/>
+<text x="840.0" y="474" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >5 V</text>
+<text x="560" y="456" font-size="15" font-weight="normal" fill="#57606a" text-anchor="end" >lever</text>
+<text x="560" y="474" font-size="15" font-weight="normal" fill="#57606a" text-anchor="end" >connectors</text>
+<rect x="340" y="600" width="360" height="190" rx="8" fill="#2f6db5" stroke="#1d4f8a" stroke-width="2" />
+<rect x="404" y="598" width="12" height="14" fill="#d4b25a"/>
+<text x="410" y="632" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >IN2</text>
+<rect x="444" y="598" width="12" height="14" fill="#d4b25a"/>
+<text x="450" y="632" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >IN1</text>
+<rect x="484" y="598" width="12" height="14" fill="#d4b25a"/>
+<text x="490" y="632" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >DC-</text>
+<rect x="524" y="598" width="12" height="14" fill="#d4b25a"/>
+<text x="530" y="632" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >DC+</text>
+<text x="630" y="628" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle" >H  COM  L</text>
+<circle cx="602" cy="646" r="5" fill="#d4b25a"/>
+<circle cx="630" cy="646" r="5" fill="#d4b25a"/>
+<circle cx="658" cy="646" r="5" fill="#d4b25a"/>
+<rect x="592" y="637" width="48" height="18" rx="3" fill="#ffd60a" stroke="#000" stroke-width="1.5" />
+<text x="630" y="676" font-size="14" font-weight="normal" fill="#ffffff" text-anchor="middle" >jumper on H</text>
+<rect x="360" y="648" width="100" height="50" rx="4" fill="#1e40af" stroke="#0b1d5c" stroke-width="2" />
+<text x="410" y="679" font-size="15" font-weight="bold" fill="#dbe7ff" text-anchor="middle" >K2</text>
+<rect x="470" y="648" width="100" height="50" rx="4" fill="#1e40af" stroke="#0b1d5c" stroke-width="2" />
+<text x="520" y="679" font-size="15" font-weight="bold" fill="#dbe7ff" text-anchor="middle" >K1</text>
+<text x="352" y="722" font-size="16" font-weight="bold" fill="#ffffff" text-anchor="start" >Relay module (2 channel, 5 V)</text>
+<rect x="380" y="764" width="120" height="26" rx="3" fill="#1565c0" stroke="#0b3d91" stroke-width="1.5" />
+<rect x="580" y="764" width="120" height="26" rx="3" fill="#1565c0" stroke="#0b3d91" stroke-width="1.5" />
+<circle cx="400" cy="777" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="400" y="757" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle" >NO2</text>
+<circle cx="440" cy="777" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="440" y="757" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle" >COM2</text>
+<circle cx="480" cy="777" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="480" y="757" font-size="13" font-weight="bold" fill="#a9c4e8" text-anchor="middle" >NC2</text>
+<circle cx="600" cy="777" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="600" y="757" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle" >NO1</text>
+<circle cx="640" cy="777" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="640" y="757" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle" >COM1</text>
+<circle cx="680" cy="777" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="680" y="757" font-size="13" font-weight="bold" fill="#a9c4e8" text-anchor="middle" >NC1</text>
+<rect x="960" y="470" width="140" height="220" rx="8" fill="#d9dde2" stroke="#6b7280" stroke-width="2" />
+<rect x="1030" y="590" width="56" height="7" rx="3" fill="#aab1ba"/>
+<rect x="1030" y="606" width="56" height="7" rx="3" fill="#aab1ba"/>
+<rect x="1030" y="622" width="56" height="7" rx="3" fill="#aab1ba"/>
+<rect x="1030" y="638" width="56" height="7" rx="3" fill="#aab1ba"/>
+<rect x="1030" y="654" width="56" height="7" rx="3" fill="#aab1ba"/>
+<text x="1058" y="504" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >Power</text>
+<text x="1058" y="525" font-size="17" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >supply</text>
+<text x="1058" y="550" font-size="17" font-weight="bold" fill="#d62828" text-anchor="middle" >5 V 2 A</text>
+<rect x="956" y="484" width="34" height="132" rx="3" fill="#3a3f47" stroke="#111" stroke-width="1.5" />
+<circle cx="968" cy="500" r="7" fill="#c0c7d0" stroke="#111"/>
+<text x="1000" y="505" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >+V</text>
+<circle cx="968" cy="600" r="7" fill="#c0c7d0" stroke="#111"/>
+<text x="1000" y="605" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >-V</text>
+<path d="M 1100 660 H 1150" stroke="#7a5230" stroke-width="12" stroke-linecap="round"/>
+<text x="1164" y="656" font-size="16" font-weight="bold" fill="#b42318" text-anchor="start" >230 V</text>
+<text x="1164" y="676" font-size="16" font-weight="bold" fill="#b42318" text-anchor="start" >mains in</text>
+<path d="M 650 364 L 650 440" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 650 364 L 650 440" fill="none" stroke="#1b1b1b" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="650" cy="364" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<circle cx="650" cy="440" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<path d="M 690 364 L 690 404 L 860 404 L 860 440" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 690 364 L 690 404 L 860 404 L 860 440" fill="none" stroke="#d62828" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="690" cy="364" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<circle cx="860" cy="440" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<path d="M 450 364 L 450 600" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 450 364 L 450 600" fill="none" stroke="#2b9348" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="450" cy="364" r="5.4" fill="#2b9348" stroke="#fff" stroke-width="2"/>
+<circle cx="450" cy="600" r="5.4" fill="#2b9348" stroke="#fff" stroke-width="2"/>
+<path d="M 490 364 L 490 396 L 460 396 A 10 10 0 0 0 440 396 L 410 396 L 410 600" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 490 364 L 490 396 L 460 396 A 10 10 0 0 0 440 396 L 410 396 L 410 600" fill="none" stroke="#d9a400" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="490" cy="364" r="5.4" fill="#d9a400" stroke="#fff" stroke-width="2"/>
+<circle cx="410" cy="600" r="5.4" fill="#d9a400" stroke="#fff" stroke-width="2"/>
+<path d="M 490 600 L 490 540 L 620 540 L 620 480" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 490 600 L 490 540 L 620 540 L 620 480" fill="none" stroke="#1b1b1b" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="490" cy="600" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<circle cx="620" cy="480" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<path d="M 530 600 L 530 570 L 810 570 L 810 480" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 530 600 L 530 570 L 810 570 L 810 480" fill="none" stroke="#d62828" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="530" cy="600" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<circle cx="810" cy="480" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<path d="M 968 500 L 930 500 L 930 460 L 900 460" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 968 500 L 930 500 L 930 460 L 900 460" fill="none" stroke="#d62828" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="968" cy="500" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<circle cx="900" cy="460" r="5.4" fill="#d62828" stroke="#fff" stroke-width="2"/>
+<path d="M 968 600 L 760 600 L 760 580 A 10 10 0 0 1 760 560 L 760 500 L 680 500 L 680 480" fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 968 600 L 760 600 L 760 580 A 10 10 0 0 1 760 560 L 760 500 L 680 500 L 680 480" fill="none" stroke="#1b1b1b" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="968" cy="600" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<circle cx="680" cy="480" r="5.4" fill="#1b1b1b" stroke="#fff" stroke-width="2"/>
+<rect x="324.22" y="486.5" width="73.78" height="27" rx="13.5" fill="#ffffff" stroke="#d9a400" stroke-width="2.5" /><text x="361.11" y="505.4" font-size="15" font-weight="bold" fill="#7a5c00" text-anchor="middle" >GPIO27</text>
+<rect x="300" y="1222" width="960" height="138" rx="0" fill="#d6ebff" stroke="none" stroke-width="0" />
+<path d="M 300 1222 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0" stroke="#5b8fd1" stroke-width="2" fill="none"/>
+<path d="M 300 1190 V 1360 H 1260 V 1190" fill="none" stroke="#1b1b1b" stroke-width="3"/>
+<rect x="292" y="1178" width="976" height="12" rx="3" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="2" />
+<rect x="489.0" y="900" width="112" height="80" rx="10" fill="#2b2f36" stroke="#0d1117" stroke-width="2" />
+<rect x="523" y="884" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<rect x="559" y="884" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<text x="545" y="930" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >24 V adapter</text>
+<text x="545" y="952" font-size="15" font-weight="normal" fill="#c9d1d9" text-anchor="middle" >head 3</text>
+<text x="545" y="971" font-size="12" font-weight="normal" fill="#9aa4b0" text-anchor="middle" >EU plug in socket</text>
+<path d="M 560 980 L 560 1296" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 560 980 L 560 1296" fill="none" stroke="#1565c0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 530 1050 L 530 1296" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 530 1050 L 530 1296" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 530 980 L 530 1010" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 530 980 L 530 1010" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="516" y="1094" width="58" height="26" rx="6" fill="#9aa1aa" stroke="#4b5563" stroke-width="2" /><text x="545" y="1112" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle" >DC</text>
+<line x1="520" y1="1026.0" x2="540" y2="1034.0" stroke="#b42318" stroke-width="3"/><line x1="520" y1="1034.0" x2="540" y2="1026.0" stroke="#b42318" stroke-width="3"/>
+<rect x="759.0" y="900" width="112" height="80" rx="10" fill="#2b2f36" stroke="#0d1117" stroke-width="2" />
+<rect x="793" y="884" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<rect x="829" y="884" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<text x="815" y="930" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >24 V adapter</text>
+<text x="815" y="952" font-size="15" font-weight="normal" fill="#c9d1d9" text-anchor="middle" >head 1</text>
+<text x="815" y="971" font-size="12" font-weight="normal" fill="#9aa4b0" text-anchor="middle" >EU plug in socket</text>
+<path d="M 830 980 L 830 1296" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 830 980 L 830 1296" fill="none" stroke="#1565c0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 800 1050 L 800 1296" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 800 1050 L 800 1296" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 800 980 L 800 1010" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 800 980 L 800 1010" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="786" y="1094" width="58" height="26" rx="6" fill="#9aa1aa" stroke="#4b5563" stroke-width="2" /><text x="815" y="1112" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle" >DC</text>
+<line x1="790" y1="1026.0" x2="810" y2="1034.0" stroke="#b42318" stroke-width="3"/><line x1="790" y1="1034.0" x2="810" y2="1026.0" stroke="#b42318" stroke-width="3"/>
+<rect x="1059.0" y="900" width="112" height="80" rx="10" fill="#2b2f36" stroke="#0d1117" stroke-width="2" />
+<rect x="1093" y="884" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<rect x="1129" y="884" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<text x="1115" y="930" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >24 V adapter</text>
+<text x="1115" y="952" font-size="15" font-weight="normal" fill="#c9d1d9" text-anchor="middle" >head 2</text>
+<text x="1115" y="971" font-size="12" font-weight="normal" fill="#9aa4b0" text-anchor="middle" >EU plug in socket</text>
+<path d="M 1130 980 L 1130 1296" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1130 980 L 1130 1296" fill="none" stroke="#1565c0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 1100 1050 L 1100 1296" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1100 1050 L 1100 1296" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 1100 980 L 1100 1010" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1100 980 L 1100 1010" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="1086" y="1094" width="58" height="26" rx="6" fill="#9aa1aa" stroke="#4b5563" stroke-width="2" /><text x="1115" y="1112" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle" >DC</text>
+<line x1="1090" y1="1026.0" x2="1110" y2="1034.0" stroke="#b42318" stroke-width="3"/><line x1="1090" y1="1034.0" x2="1110" y2="1026.0" stroke="#b42318" stroke-width="3"/>
+<rect x="493" y="1296" width="104" height="40" rx="6" fill="#c3c9d1" stroke="#4b5563" stroke-width="2" />
+<ellipse cx="545" cy="1296" rx="52" ry="9" fill="#dfe3e8" stroke="#4b5563" stroke-width="2"/>
+<ellipse cx="545" cy="1296" rx="24" ry="5" fill="#f5f7fa" stroke="#8a9099" stroke-width="1.5"/>
+<text x="545" y="1324" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle" >Head 3</text>
+<rect x="763" y="1296" width="104" height="40" rx="6" fill="#c3c9d1" stroke="#4b5563" stroke-width="2" />
+<ellipse cx="815" cy="1296" rx="52" ry="9" fill="#dfe3e8" stroke="#4b5563" stroke-width="2"/>
+<ellipse cx="815" cy="1296" rx="24" ry="5" fill="#f5f7fa" stroke="#8a9099" stroke-width="1.5"/>
+<text x="815" y="1324" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle" >Head 1</text>
+<rect x="1063" y="1296" width="104" height="40" rx="6" fill="#c3c9d1" stroke="#4b5563" stroke-width="2" />
+<ellipse cx="1115" cy="1296" rx="52" ry="9" fill="#dfe3e8" stroke="#4b5563" stroke-width="2"/>
+<ellipse cx="1115" cy="1296" rx="24" ry="5" fill="#f5f7fa" stroke="#8a9099" stroke-width="1.5"/>
+<text x="1115" y="1324" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle" >Head 2</text>
+<path d="M 440 777 L 440 1010 L 530 1010" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 440 777 L 440 1010 L 530 1010" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="440" cy="777" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="530" cy="1010" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<path d="M 400 777 L 400 1050 L 530 1050" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 400 777 L 400 1050 L 530 1050" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="400" cy="777" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="530" cy="1050" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<path d="M 640 777 L 640 812 L 720 812 L 720 1010 L 800 1010" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 640 777 L 640 812 L 720 812 L 720 1010 L 800 1010" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="640" cy="777" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="800" cy="1010" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<path d="M 600 777 L 600 846 L 680 846 L 680 1050 L 800 1050" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 600 777 L 600 846 L 680 846 L 680 1050 L 800 1050" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="600" cy="777" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="800" cy="1050" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<path d="M 720 812 L 1020 812 L 1020 1010 L 1100 1010" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 720 812 L 1020 812 L 1020 1010 L 1100 1010" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="720" cy="812" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="1100" cy="1010" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<path d="M 680 846 L 710 846 A 10 10 0 0 1 730 846 L 980 846 L 980 1050 L 1100 1050" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 680 846 L 710 846 A 10 10 0 0 1 730 846 L 980 846 L 980 1050 L 1100 1050" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="680" cy="846" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="1100" cy="1050" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="720" cy="812" r="8" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="680" cy="846" r="8" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<text x="872" y="1080" font-size="15" font-weight="bold" fill="#b42318" text-anchor="start" >red X: + wire cut here.</text>
+<text x="872" y="1099" font-size="15" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Adapter end to COM,</text>
+<text x="872" y="1118" font-size="15" font-weight="normal" fill="#1b1b1b" text-anchor="start" >head end to NO.</text>
+<text x="872" y="1140" font-size="15" font-weight="normal" fill="#57606a" text-anchor="start" >DC = inline DC plug.</text>
+<text x="872" y="1160" font-size="15" font-weight="bold" fill="#1565c0" text-anchor="start" >Minus wire: not cut.</text>
+<text x="314" y="1386" font-size="16" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Water tank: 20-30 L box with a lid, in front of the cooler fan. All heads in one tank.</text>
+<line x1="1190" y1="1226" x2="1190" y2="1292" stroke="#1b1b1b" stroke-width="2"/>
+<path d="M 1184 1234 L 1190 1224 L 1196 1234 M 1184 1284 L 1190 1294 L 1196 1284" stroke="#1b1b1b" stroke-width="2" fill="none"/>
+<text x="1198" y="1265.0" font-size="15" font-weight="bold" fill="#1b1b1b" text-anchor="start" >3-5 cm</text>
+<path d="M 140 1150 L 140 1206 L 326 1206" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 140 1150 L 140 1206 L 326 1206" fill="none" stroke="#8a8f98" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="9 7"/>
+<rect x="326" y="1196" width="28" height="20" rx="4" fill="#e5e7eb" stroke="#8a8f98" stroke-width="2" />
+<line x1="352" y1="1212" x2="380" y2="1224" stroke="#8a8f98" stroke-width="3"/>
+<circle cx="390" cy="1226" r="11" fill="#f8f9fa" stroke="#8a8f98" stroke-width="2.5"/>
+<rect x="70" y="1040" width="140" height="110" rx="10" fill="#f8f9fa" stroke="#8a8f98" stroke-width="2.5" stroke-dasharray="8 6"/>
+<text x="140" y="1078" font-size="16" font-weight="bold" fill="#1b1b1b" text-anchor="middle" >RO filter</text>
+<text x="140" y="1100" font-size="15" font-weight="normal" fill="#57606a" text-anchor="middle" >(optional)</text>
+<text x="140" y="1124" font-size="14" font-weight="normal" fill="#57606a" text-anchor="middle" >water in</text>
+<text x="80" y="1268" font-size="14" font-weight="normal" fill="#57606a" text-anchor="start" >float valve</text>
+<text x="80" y="1286" font-size="14" font-weight="normal" fill="#57606a" text-anchor="start" >(optional)</text>
+<rect x="40" y="1430" width="760" height="520" rx="14" fill="#fffbea" stroke="#d9a400" stroke-width="2.5" />
+<text x="60" y="1468" font-size="22" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Good to know</text>
+<circle cx="68" cy="1504" r="5" fill="#d9a400"/>
+<text x="84" y="1510" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >The relay only switches 24 V DC. No 230 V wiring is needed: each adapter stays</text>
+<text x="84" y="1533" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >plugged into its socket.</text>
+<circle cx="68" cy="1564" r="5" fill="#d9a400"/>
+<text x="84" y="1570" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Never run the heads dry: they need 3-5 cm of water above the disc. The built-in</text>
+<text x="84" y="1593" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >float cuts the power when the water is low.</text>
+<circle cx="68" cy="1624" r="5" fill="#d9a400"/>
+<text x="84" y="1630" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Use demineralised or RO water, otherwise the discs scale up and white dust settles</text>
+<text x="84" y="1653" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >on the apples.</text>
+<circle cx="68" cy="1684" r="5" fill="#d9a400"/>
+<text x="84" y="1690" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Do not join the 24 V minus to the ESP's GND. Each adapter is isolated, so it is not</text>
+<text x="84" y="1713" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >needed.</text>
+<circle cx="68" cy="1744" r="5" fill="#d9a400"/>
+<text x="84" y="1750" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Relay contacts are rated 10 A. Each head draws about 0.75 A, so two heads on</text>
+<text x="84" y="1773" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >channel 1 is about 1.5 A.</text>
+<circle cx="68" cy="1804" r="5" fill="#d9a400"/>
+<text x="84" y="1810" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Channel 1 has two heads with their own adapters: both adapter + wires go into COM1</text>
+<text x="84" y="1833" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >and both head + wires into NO1 (twist them together or use a lever connector). The</text>
+<text x="84" y="1856" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >dots show these joins.</text>
+<rect x="830" y="1430" width="430" height="520" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2.5" stroke-dasharray="10 7"/>
+<text x="850" y="1468" font-size="22" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Small fridge variant</text>
+<text x="850" y="1494" font-size="15" font-weight="normal" fill="#57606a" text-anchor="start" >1 head on channel 1 only, IN2 / D27 unused.</text>
+<rect x="860" y="1520" width="200" height="96" rx="8" fill="#2f6db5" stroke="#1d4f8a" stroke-width="2" />
+<text x="872" y="1546" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="start" >Relay, channel 1</text>
+<text x="872" y="1566" font-size="14" font-weight="normal" fill="#dbe7ff" text-anchor="start" >IN1 on GPIO26</text>
+<rect x="950" y="1594" width="80" height="22" rx="3" fill="#1565c0" stroke="#0b3d91" stroke-width="1.5" />
+<circle cx="970" cy="1605" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="970" y="1586" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle" >NO1</text>
+<circle cx="1010" cy="1605" r="7" fill="#c0c7d0" stroke="#333"/>
+<text x="1010" y="1586" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle" >COM1</text>
+<rect x="1000" y="1862" width="240" height="68" rx="0" fill="#d6ebff" stroke="none" stroke-width="0" />
+<path d="M 1000 1862 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0 q 10 -7 20 0 t 20 0" stroke="#5b8fd1" stroke-width="2" fill="none"/>
+<path d="M 1000 1850 V 1930 H 1240 V 1850" fill="none" stroke="#1b1b1b" stroke-width="3"/>
+<rect x="992" y="1838" width="256" height="12" rx="3" fill="#e5e7eb" stroke="#1b1b1b" stroke-width="2" />
+<rect x="1059.0" y="1648" width="112" height="80" rx="10" fill="#2b2f36" stroke="#0d1117" stroke-width="2" />
+<rect x="1093" y="1632" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<rect x="1129" y="1632" width="8" height="18" rx="4" fill="#b8bec6" stroke="#6b7280" stroke-width="1.5"/>
+<text x="1115" y="1678" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle" >24 V adapter</text>
+<text x="1115" y="1700" font-size="15" font-weight="normal" fill="#c9d1d9" text-anchor="middle" >head 1</text>
+<text x="1115" y="1719" font-size="12" font-weight="normal" fill="#9aa4b0" text-anchor="middle" >EU plug in socket</text>
+<path d="M 1130 1728 L 1130 1885" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1130 1728 L 1130 1885" fill="none" stroke="#1565c0" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 1100 1782 L 1100 1885" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1100 1782 L 1100 1885" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<path d="M 1100 1728 L 1100 1748" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1100 1728 L 1100 1748" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<rect x="1086" y="1810" width="58" height="26" rx="6" fill="#9aa1aa" stroke="#4b5563" stroke-width="2" /><text x="1115" y="1828" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle" >DC</text>
+<line x1="1090" y1="1761.0" x2="1110" y2="1769.0" stroke="#b42318" stroke-width="3"/><line x1="1090" y1="1769.0" x2="1110" y2="1761.0" stroke="#b42318" stroke-width="3"/>
+<rect x="1063" y="1885" width="104" height="40" rx="6" fill="#c3c9d1" stroke="#4b5563" stroke-width="2" />
+<ellipse cx="1115" cy="1885" rx="52" ry="9" fill="#dfe3e8" stroke="#4b5563" stroke-width="2"/>
+<ellipse cx="1115" cy="1885" rx="24" ry="5" fill="#f5f7fa" stroke="#8a9099" stroke-width="1.5"/>
+<text x="1115" y="1913" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle" >Head 1</text>
+<path d="M 1010 1605 L 1010 1748 L 1100 1748" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 1010 1605 L 1010 1748 L 1100 1748" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="1010" cy="1605" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="1100" cy="1748" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<path d="M 970 1605 L 970 1782 L 1100 1782" fill="none" stroke="#ffffff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 970 1605 L 970 1782 L 1100 1782" fill="none" stroke="#7b2cbf" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" />
+<circle cx="970" cy="1605" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<circle cx="1100" cy="1782" r="4.5" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+<rect x="1290" y="120" width="400" height="1830" rx="14" fill="#f4f6f8" stroke="#d0d7de" stroke-width="2" />
+<text x="1314" y="162" font-size="24" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Steps</text>
+<circle cx="1330" cy="196" r="16" fill="#57606a"/>
+<text x="1330" y="202" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >1</text>
+<text x="1356" y="202" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Unplug everything first. The 5 V</text>
+<text x="1356" y="225" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >supply's mains side must be wired by</text>
+<text x="1356" y="248" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >someone who knows how.</text>
+<circle cx="1330" cy="281" r="16" fill="#d62828"/>
+<text x="1330" y="287" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >2</text>
+<text x="1356" y="287" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >5 V supply +V to the 5 V lever</text>
+<text x="1356" y="310" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >connector, -V to the GND lever</text>
+<text x="1356" y="333" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >connector. ESP32 VIN to 5 V, GND to</text>
+<text x="1356" y="356" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >GND.</text>
+<circle cx="1330" cy="389" r="16" fill="#2b9348"/>
+<text x="1330" y="395" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >3</text>
+<text x="1356" y="395" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Relay DC+ to 5 V, DC- to GND, jumper</text>
+<text x="1356" y="418" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >on H. IN1 to D26 (GPIO26), IN2 to D27</text>
+<text x="1356" y="441" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >(GPIO27).</text>
+<circle cx="1330" cy="474" r="16" fill="#7b2cbf"/>
+<text x="1330" y="480" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >4</text>
+<text x="1356" y="480" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >On each fogger's DC cable, cut only</text>
+<text x="1356" y="503" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >the + wire. Leave the minus wire</text>
+<text x="1356" y="526" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >whole.</text>
+<circle cx="1330" cy="559" r="16" fill="#7b2cbf"/>
+<text x="1330" y="565" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >5</text>
+<text x="1356" y="565" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Adapter end of the + wire to COM,</text>
+<text x="1356" y="588" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >head end to NO. Heads 1 and 2: channel</text>
+<text x="1356" y="611" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >1 (COM1 / NO1). Head 3: channel 2</text>
+<text x="1356" y="634" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >(COM2 / NO2).</text>
+<circle cx="1330" cy="667" r="16" fill="#1565c0"/>
+<text x="1330" y="673" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >6</text>
+<text x="1356" y="673" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Put the heads in the tank with 3-5</text>
+<text x="1356" y="696" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >cm of water over the discs, then plug</text>
+<text x="1356" y="719" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >in the adapters.</text>
+<circle cx="1330" cy="752" r="16" fill="#57606a"/>
+<text x="1330" y="758" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle" >7</text>
+<text x="1356" y="758" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >Power on. Channel 1 switches heads 1</text>
+<text x="1356" y="781" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >and 2, channel 2 switches head 3. The</text>
+<text x="1356" y="804" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >relay clicks each time.</text>
+<line x1="1314" y1="849" x2="1666" y2="849" stroke="#d0d7de" stroke-width="2"/>
+<text x="1314" y="885" font-size="20" font-weight="bold" fill="#1b1b1b" text-anchor="start" >Wire colours</text>
+<line x1="1314" y1="911" x2="1360" y2="911" stroke="#d62828" stroke-width="7" stroke-linecap="round" />
+<text x="1374" y="917" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >5 V</text>
+<line x1="1314" y1="941" x2="1360" y2="941" stroke="#1b1b1b" stroke-width="7" stroke-linecap="round" />
+<text x="1374" y="947" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >GND (ESP side)</text>
+<line x1="1314" y1="971" x2="1360" y2="971" stroke="#2b9348" stroke-width="7" stroke-linecap="round" />
+<text x="1374" y="977" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >signal GPIO26 (channel 1)</text>
+<line x1="1314" y1="1001" x2="1360" y2="1001" stroke="#d9a400" stroke-width="7" stroke-linecap="round" />
+<text x="1374" y="1007" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >signal GPIO27 (channel 2)</text>
+<line x1="1314" y1="1031" x2="1360" y2="1031" stroke="#7b2cbf" stroke-width="7" stroke-linecap="round" />
+<text x="1374" y="1037" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >+24 V (cut wire, via relay)</text>
+<line x1="1314" y1="1061" x2="1360" y2="1061" stroke="#1565c0" stroke-width="7" stroke-linecap="round" />
+<text x="1374" y="1067" font-size="17" font-weight="normal" fill="#1b1b1b" text-anchor="start" >24 V minus (untouched)</text>
+<text x="1314" y="1107" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >A small hump means two wires cross without</text>
+<text x="1314" y="1129" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >touching. A dot means the wires are joined.</text>
+<text x="1314" y="1151" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >Thin wires are fine on the 24 V side (under 1 A</text>
+<text x="1314" y="1173" font-size="16" font-weight="normal" fill="#57606a" text-anchor="start" >per head).</text>
+</svg>
