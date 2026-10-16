@@ -4,7 +4,7 @@ static const char INDEX_HTML[] PROGMEM = R"HTML(<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HumidESP</title>
-<link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/icon-180.png"><meta name="theme-color" content="#0f1418">
+<link rel="icon" href="/icon-180.png"><link rel="manifest" href="/manifest.json"><link rel="apple-touch-icon" href="/icon-180.png"><meta name="theme-color" content="#0f1418">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="HumidESP">
 <style>
 :root{--bg:#0f1418;--card:#182027;--line:#26313a;--fg:#e6edf2;--mut:#8b9aa6;--acc:#4cc2ff;--ok:#3ccf8e;--warn:#ffb547;--bad:#ff5d6c}
@@ -79,15 +79,34 @@ svg.room .drag{cursor:grab}
   <div class="tv" id="tgtv">--%</div></div>
 </section>
 
+<section class="card" id="wiz" style="display:none">
+ <div class="hd"><h2>Room setup</h2><button class="s" onclick="wizClose(true)">Skip</button></div>
+ <div class="mut sm">Enter the room and what you have. The ESP looks for connected sensors and suggests where everything goes.</div>
+ <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+  <label>Width (m)<input type="number" id="wW" step="0.1" min="1" oninput="wizPlan()"></label>
+  <label>Length (m)<input type="number" id="wL" step="0.1" min="1" oninput="wizPlan()"></label>
+  <label>Height (m)<input type="number" id="wH" step="0.1" min="1" oninput="wizPlan()"></label>
+ </div>
+ <div class="grid">
+  <label>Cooler (evaporator) on the<select id="wC" onchange="wizPlan()"><option value="0">top wall</option><option value="1">right wall</option><option value="2">bottom wall</option><option value="3">left wall</option></select></label>
+  <label>Humidifiers<select id="wN" onchange="wizPlan()"><option>1</option><option>2</option></select></label>
+  <label>Sensors<input type="number" id="wS" min="1" max="8" oninput="wizPlan()"></label>
+  <label>&nbsp;<button onclick="wizDetect()" id="wDet">Detect sensors</button></label>
+ </div>
+ <div id="wFound" class="sm mut" style="margin-top:8px"></div>
+ <div id="wPlan" class="sm" style="margin-top:8px"></div>
+ <div class="row"><button class="pri" onclick="wizApply()">Apply layout</button><button onclick="wizClose()">Cancel</button></div>
+</section>
+
 <section class="card"><div class="hd"><h2>Humidifiers</h2></div><div id="chs"></div></section>
 
 <section class="card">
- <div class="hd"><h2>Room</h2><div class="row" style="margin:0"><span class="mut sm" id="roomHint"></span><button class="s" id="editBtn" onclick="toggleEdit()">Edit layout</button></div></div>
+ <div class="hd"><h2>Room</h2><div class="row" style="margin:0"><span class="mut sm" id="roomHint"></span><button class="s" onclick="wizOpen()">Auto layout</button><button class="s" id="editBtn" onclick="toggleEdit()">Edit layout</button></div></div>
  <svg class="room" id="top"></svg>
  <div class="mut sm" style="margin:8px 0 4px">Side view (height)</div>
  <svg class="room" id="side"></svg>
  <div id="roomEdit" class="edit" style="display:none">
-  <div class="mut sm">Drag sensors and humidifiers on the top view, drag sensors up/down on the side view. Sizes in metres.</div>
+  <div class="mut sm">Drag sensors and humidifiers on the top view, and up/down on the side view. Sizes in metres.</div>
   <div class="grid" style="grid-template-columns:repeat(3,1fr)">
    <label>Width<input type="number" id="rw" step="0.1" min="1" oninput="roomDims()"></label>
    <label>Length<input type="number" id="rl" step="0.1" min="1" oninput="roomDims()"></label>
@@ -260,7 +279,8 @@ async function refresh(){
   <td style="color:${x.ok?rhColor(x.rh):'var(--bad)'}">${x.ok?x.rh.toFixed(1)+'%':'offline'}</td><td>${x.ok?x.t.toFixed(1)+'°':''}</td>
   <td><button class="s" onclick="editSensor(${i})">Edit</button></td></tr>`).join('')||'<tr><td colspan="6" class="mut">No sensors yet</td></tr>';
  if(!editing)fillSettings();
- if(!editLayout){model={sensors:clone(st.sensors),room:clone(st.room),channels:st.channels.map(c=>({x:c.x,y:c.y}))};drawRoom()}
+ if(!editLayout&&!wiz){model={sensors:clone(st.sensors),room:clone(st.room),channels:st.channels.map(c=>({x:c.x,y:c.y,z:c.z}))};drawRoom()}
+ if(!s.setupDone&&!wizSeen){wizSeen=1;wizOpen()}
  $('wifiStatus').innerHTML=(w.staConnected?`Connected to <b>${esc(w.staSsid)}</b> · IP <b>${w.staIp}</b> · ${w.rssi} dBm`:w.staSsid?`Trying to connect to <b>${esc(w.staSsid)}</b>...`:'Not connected to a home network.')+
   `<br>Hotspot <b>${esc(w.apSsid)}</b> at ${w.apIp} · ${w.apClients} client(s)`;$('mdns').textContent=w.mdns;
  const au=st.auth&&st.auth.enabled;$('pwState').textContent=au?'(on)':'(off)';$('pwSet').textContent=au?'Change password':'Set password';
@@ -280,6 +300,8 @@ function drawRoom(){if(!st||!model)return;const R=model.room,S=100,W=R.w*S,Lg=R.
   for(let i=0;i<nx;i++)for(let j=0;j<ny;j++)g+=`<rect x="${i*cw}" y="${j*chh}" width="${cw+.5}" height="${chh+.5}" fill="${rhColor(idw((i+.5)*cw,(j+.5)*chh,pts),.28)}"/>`}
  let top=`<rect x="0" y="0" width="${W}" height="${Lg}" fill="none" stroke="#3a4752" stroke-width="${fs/5}"/>${g}`;
  for(let m=1;m<R.w;m++)top+=`<line x1="${m*S}" y1="0" x2="${m*S}" y2="${Lg}" stroke="#ffffff10"/>`;for(let m=1;m<R.l;m++)top+=`<line x1="0" y1="${m*S}" x2="${W}" y2="${m*S}" stroke="#ffffff10"/>`;
+ const cw=R.cooler|0,cl=[[0,0,W,0],[W,0,W,Lg],[0,Lg,W,Lg],[0,0,0,Lg]][cw];
+ top+=`<line x1="${cl[0]}" y1="${cl[1]}" x2="${cl[2]}" y2="${cl[3]}" stroke="#7ae0e0" stroke-width="${fs/2}"/><text x="${(cl[0]+cl[2])/2}" y="${(cl[1]+cl[3])/2+(cw==2?-fs*.5:fs*1.2)}" font-size="${fs*.75}" fill="#7ae0e0" text-anchor="middle">cooler</text>`;
  top+=`<text x="${W-fs*.3}" y="${Lg-fs*.4}" font-size="${fs*.8}" fill="#8b9aa6" text-anchor="end">${R.w} × ${R.l} m</text>`;
  model.channels.forEach((c,i)=>{const on=st.channels[i]&&st.channels[i].on;top+=`<g class="${editLayout?'drag':''}" data-kind="ch" data-i="${i}" transform="translate(${c.x*W},${c.y*Lg})">
   <rect x="${-r}" y="${-r}" width="${2*r}" height="${2*r}" rx="${r/3}" fill="${on?'#4cc2ff':'#22303a'}" stroke="#4cc2ff" stroke-width="${fs/8}"/>
@@ -288,12 +310,16 @@ function drawRoom(){if(!st||!model)return;const R=model.room,S=100,W=R.w*S,Lg=R.
   <circle r="${r}" fill="${lv?rhColor(lv.rh):'#44515c'}" stroke="${COLORS[i%8]}" stroke-width="${fs/5}"/>
   <text y="${-r-fs*.35}" font-size="${fs*.85}" text-anchor="middle" fill="#e6edf2">${esc(x.name)}</text>
   <text y="${r+fs*1.05}" font-size="${fs*.8}" text-anchor="middle" fill="#8b9aa6">${lv?lv.rh.toFixed(1)+'% '+lv.t.toFixed(1)+'°':'offline'} · ${x.z.toFixed(1)}m</text></g>`});
+ const ghost=(x,y,i)=>`<g transform="translate(${x},${y})"><circle r="${r}" fill="none" stroke="#8b9aa6" stroke-dasharray="${fs/3}" stroke-width="${fs/8}"/><text y="${fs*.35}" font-size="${fs*.8}" text-anchor="middle" fill="#8b9aa6">S${i}</text></g>`,pn=model.sensors.length+1;
+ (model.plan||[]).forEach((o,i)=>top+=ghost(o.x*W,o.y*Lg,pn+i));
  const pad=fs*3;$('top').setAttribute('viewBox',`${-pad} ${-pad} ${W+2*pad} ${Lg+2*pad}`);$('top').innerHTML=top;
  let side=`<rect x="0" y="0" width="${W}" height="${H}" fill="none" stroke="#3a4752" stroke-width="${fs/5}"/><line x1="0" y1="${H}" x2="${W}" y2="${H}" stroke="#8b9aa6" stroke-width="${fs/4}"/>`;
  for(let m=1;m<R.h;m++)side+=`<line x1="0" y1="${H-m*S}" x2="${W}" y2="${H-m*S}" stroke="#ffffff10"/><text x="${-fs*.3}" y="${H-m*S+fs*.3}" font-size="${fs*.7}" fill="#8b9aa6" text-anchor="end">${m}m</text>`;
+ model.channels.forEach((c,i)=>{side+=`<g class="${editLayout?'drag':''}" data-kind="cz" data-i="${i}" transform="translate(${c.x*W},${H-(c.z??2)*S})"><rect x="${-r*.7}" y="${-r*.7}" width="${1.4*r}" height="${1.4*r}" rx="${r/4}" fill="#22303a" stroke="#4cc2ff" stroke-width="${fs/8}"/><text x="${r}" y="${fs*.3}" font-size="${fs*.75}" fill="#4cc2ff">H${i+1}</text></g>`});
  model.sensors.forEach((x,i)=>{const lv=live(i);side+=`<g class="${editLayout?'drag':''}" data-kind="z" data-i="${i}" transform="translate(${x.x*W},${H-x.z*S})">
   <circle r="${r*.75}" fill="${lv?rhColor(lv.rh):'#44515c'}" stroke="${COLORS[i%8]}" stroke-width="${fs/5}"/>
   <text x="${r}" y="${fs*.3}" font-size="${fs*.75}" fill="#e6edf2">${esc(x.name)}</text></g>`});
+ (model.plan||[]).forEach((o,i)=>side+=ghost(o.x*W,H-o.z*S,pn+i));
  $('side').setAttribute('viewBox',`${-pad} ${-fs} ${W+2*pad} ${H+fs*2}`);$('side').innerHTML=side;
  $('roomHint').textContent=editLayout?'editing':'';}
 function svgPt(svg,e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
@@ -302,9 +328,36 @@ for(const id of['top','side']){const svg=$(id);
  svg.addEventListener('pointerdown',e=>{if(!editLayout)return;const g=e.target.closest('g[data-kind]');if(!g)return;drag={svg,g,kind:g.dataset.kind,i:+g.dataset.i};svg.setPointerCapture(e.pointerId);e.preventDefault()});
  svg.addEventListener('pointermove',e=>{if(!drag||drag.svg!==svg)return;const R=model.room,p=svgPt(svg,e),W=R.w*100,Lg=R.l*100,H=R.h*100;
   const cx=Math.min(W,Math.max(0,p.x));
-  if(drag.kind=='z'){const z=Math.min(H,Math.max(0,H-p.y));model.sensors[drag.i].x=cx/W;model.sensors[drag.i].z=Math.round(z)/100;drag.g.setAttribute('transform',`translate(${cx},${H-z})`)}
+  if(drag.kind=='z'||drag.kind=='cz'){const z=Math.min(H,Math.max(0,H-p.y)),o=drag.kind=='z'?model.sensors[drag.i]:model.channels[drag.i];o.x=cx/W;o.z=Math.round(z)/100;drag.g.setAttribute('transform',`translate(${cx},${H-z})`)}
   else{const cy=Math.min(Lg,Math.max(0,p.y)),o=drag.kind=='s'?model.sensors[drag.i]:model.channels[drag.i];o.x=cx/W;o.y=cy/Lg;drag.g.setAttribute('transform',`translate(${cx},${cy})`)}});
  svg.addEventListener('pointerup',()=>{if(drag){drag=null;drawRoom()}});}
+// Layout wizard. Rules for a cold store: humidifiers high, 0.5 m in front of the cooler so its fan carries the mist;
+// sensors in the far 60% of the room (out of the mist and the cold blast) at mixed heights: middle of the stack, low, high.
+let wiz=0,wizSeen=0,found=null;
+function wizOpen(){if(editLayout)toggleEdit(false);const R=st.room;$('wW').value=R.w;$('wL').value=R.l;$('wH').value=R.h;$('wC').value=R.cooler|0;
+ $('wN').value=Math.max(1,st.channels.filter(c=>c.mode!='off').length);$('wS').value=Math.max(1,st.sensors.length);found=null;$('wFound').textContent='';wiz=1;$('wiz').style.display='';$('wiz').scrollIntoView({behavior:'smooth'});wizPlan()}
+function wizClose(skip){wiz=0;$('wiz').style.display='none';if(skip)api('/api/settings',{setupDone:true}).catch(()=>{});refresh()}
+async function wizDetect(){$('wDet').textContent='Looking...';try{const r=await api('/api/detect',{});found=r.found;
+ $('wFound').innerHTML=found.length?'Found: '+found.map(f=>`<b>${TYPE_LBL[f.type]}${f.type.startsWith('sht')?(f.addr&128?' bus 2':''):f.addr?' #'+f.addr:''}</b> ${f.rh.toFixed(0)}%`).join(', '):'No sensors answered. Check wiring, or set the count by hand.';
+ if(found.length)$('wS').value=found.length;wizPlan()}catch(e){toast(e.message)}$('wDet').textContent='Detect sensors'}
+// Detected sensors keep their existing name, offsets and settings when they were already configured.
+function wizSensors(){if(!found||!found.length)return clone(st.sensors);
+ return found.map((f,i)=>st.sensors.find(x=>x.type==f.type&&x.addr==f.addr)||{name:'Sensor '+(i+1),type:f.type,addr:f.addr,control:true,hOff:0,tOff:0})}
+function wizPlan(){if(!wiz)return;const w=Math.max(1,+$('wW').value||1),l=Math.max(1,+$('wL').value||1),h=Math.max(1,+$('wH').value||1),cw=+$('wC').value,nh=+$('wN').value;
+ const sens=wizSensors(),ns=Math.max(1,Math.min(8,+$('wS').value||1),sens.length),depth=cw%2?w:l,r1=v=>Math.round(v*10)/10;
+ const P=(u,v)=>cw==0?[u,v]:cw==1?[1-v,u]:cw==2?[u,1-v]:[v,u];
+ const chs=st.channels.map((c,i)=>{const[x,y]=P((i+.5)/nh,Math.min(.15,.5/depth));return{x,y,z:r1(Math.max(1,h-.6))}});
+ const Z=[r1(Math.min(1.5,h/2)),.4,r1(h-.4)],cols=ns<3?ns:Math.ceil(ns/2),rows=Math.ceil(ns/cols);
+ const spots=[...Array(ns)].map((_,i)=>{let u,v;if(ns==1){u=.5;v=.65}else if(ns==2){u=i?.75:.25;v=i?.85:.5}
+  else{const rr=Math.floor(i/cols),c=i%cols;u=.12+.76*(c+.5+(rr%2?.25:0))/cols;v=.4+.52*(rr+.5)/rows}const[x,y]=P(Math.min(.9,u),v);return{x,y,z:Z[i%3]}});
+ model={room:{w,l,h,cooler:cw},channels:chs,sensors:sens.map((x,i)=>Object.assign(clone(x),spots[i])),plan:spots.slice(sens.length)};drawRoom();
+ const m=o=>`${r1(o.x*w)} m from the left, ${r1(o.y*l)} m from the top, <b>${o.z} m high</b>`,Zw=['middle of the stack','near the floor','near the ceiling'];
+ $('wPlan').innerHTML='<b>Suggested layout</b> (drawn below in Room):<br>'+chs.slice(0,nh).map((c,i)=>`H${i+1}: ${m(c)}. Aim the mist into the cooler's air stream, not at the crates.`).join('<br>')+
+  '<br>'+spots.map((o,i)=>`${sens[i]?esc(sens[i].name):'S'+(i+1)+' (dashed, not connected yet)'}: ${m(o)} (${Zw[i%3]}).`).join('<br>')+
+  '<br><span class="mut">Keep sensors at least 1.5 m from the mist and out of the cooler\'s cold blast. Mount them on a post or a crate, not on the outer wall or the door.</span>'}
+async function wizApply(){wizPlan();try{await api('/api/sensors',{sensors:model.sensors,room:model.room,channels:model.channels});
+ const nh=+$('wN').value;for(let i=nh;i<st.channels.length;i++)await api('/api/channel',{i,mode:'off'});
+ await api('/api/settings',{setupDone:true});toast('Layout saved');wizClose();loadHist()}catch(e){toast(e.message)}}
 function toggleEdit(on){editLayout=on===undefined?!editLayout:on;$('roomEdit').style.display=editLayout?'':'none';$('editBtn').textContent=editLayout?'Editing...':'Edit layout';
  if(editLayout){$('rw').value=model.room.w;$('rl').value=model.room.l;$('rhh').value=model.room.h}else refresh();drawRoom()}
 function roomDims(){const w=+$('rw').value,l=+$('rl').value,h=+$('rhh').value;if(w>=1)model.room.w=w;if(l>=1)model.room.l=l;if(h>=1)model.room.h=h;drawRoom()}

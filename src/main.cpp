@@ -54,6 +54,7 @@ struct Settings {
   bool waterOkWhenLow = true; // float switch closed (pin LOW) means water OK
   bool buzzer = false;
   bool autoUpdate = true;     // install new GitHub releases by itself
+  bool setupDone = false;     // layout wizard finished or skipped
   String webhook;
   String apPass = AP_DEFAULT_PASS;
   String staSsid;
@@ -65,7 +66,8 @@ struct Settings {
 
 struct Layout {
   float w = 6, l = 5, h = 4;  // room size in metres
-  float chx[NUM_CHANNELS], chy[NUM_CHANNELS];
+  float chx[NUM_CHANNELS], chy[NUM_CHANNELS], chz[NUM_CHANNELS];
+  uint8_t cooler = 0;         // wall with the cooler: 0 top, 1 right, 2 bottom, 3 left (top view)
 };
 
 struct SensorState {
@@ -210,6 +212,7 @@ static void loadSettings() {
   S.waterOkWhenLow = prefs.getBool("waterLow", true);
   S.buzzer = prefs.getBool("buzzer", false);
   S.autoUpdate = prefs.getBool("autoUpd", true);
+  S.setupDone = prefs.getBool("setup", false);
   S.webhook = prefs.getString("webhook", "");
   S.apPass = prefs.getString("apPass", AP_DEFAULT_PASS);
   S.staSsid = prefs.getString("ssid", DEFAULT_STA_SSID);
@@ -220,6 +223,7 @@ static void loadSettings() {
     S.presses[i] = min<uint8_t>(prefs.getUChar(chKey("press", i).c_str(), 0), 5);
     L.chx[i] = 0.1f + 0.8f * i / max(1, NUM_CHANNELS - 1);
     L.chy[i] = 0.9f;
+    L.chz[i] = 2;
   }
   bus.baud = prefs.getUInt("baud", bus.baud);
   bus.fc = prefs.getUChar("mbFc", bus.fc);
@@ -232,10 +236,12 @@ static void loadSettings() {
     L.w = d["w"] | L.w;
     L.l = d["l"] | L.l;
     L.h = d["h"] | L.h;
+    L.cooler = d["c"] | 0;
     JsonArray a = d["ch"];
     for (int i = 0; i < NUM_CHANNELS && i < (int)a.size(); i++) {
       L.chx[i] = a[i]["x"] | L.chx[i];
       L.chy[i] = a[i]["y"] | L.chy[i];
+      L.chz[i] = a[i]["z"] | L.chz[i];
     }
   }
   d.clear();
@@ -275,6 +281,7 @@ static void saveSettings() {
   prefs.putBool("waterLow", S.waterOkWhenLow);
   prefs.putBool("buzzer", S.buzzer);
   prefs.putBool("autoUpd", S.autoUpdate);
+  prefs.putBool("setup", S.setupDone);
   prefs.putString("webhook", S.webhook);
   prefs.putString("apPass", S.apPass);
   prefs.putString("ssid", S.staSsid);
@@ -294,11 +301,13 @@ static void saveSettings() {
   d["w"] = L.w;
   d["l"] = L.l;
   d["h"] = L.h;
+  d["c"] = L.cooler;
   JsonArray a = d["ch"].to<JsonArray>();
   for (int i = 0; i < NUM_CHANNELS; i++) {
     JsonObject o = a.add<JsonObject>();
     o["x"] = L.chx[i];
     o["y"] = L.chy[i];
+    o["z"] = L.chz[i];
   }
   String out;
   serializeJson(d, out);
@@ -850,6 +859,7 @@ static void handleState() {
     o["since"] = (millis() - ch[i].lastChange) / 1000;
     o["x"] = L.chx[i];
     o["y"] = L.chy[i];
+    o["z"] = L.chz[i];
     o["presses"] = S.presses[i];
   }
 
@@ -877,12 +887,14 @@ static void handleState() {
   s["waterOkWhenLow"] = S.waterOkWhenLow;
   s["buzzer"] = S.buzzer;
   s["autoUpdate"] = S.autoUpdate;
+  s["setupDone"] = S.setupDone;
   s["webhook"] = S.webhook;
 
   JsonObject r = d["room"].to<JsonObject>();
   r["w"] = L.w;
   r["l"] = L.l;
   r["h"] = L.h;
+  r["cooler"] = L.cooler;
 
   JsonObject b = d["bus"].to<JsonObject>();
   b["baud"] = bus.baud;
@@ -990,6 +1002,7 @@ static void handleSettings() {
   flag("waterOkWhenLow", S.waterOkWhenLow);
   flag("buzzer", S.buzzer);
   flag("autoUpdate", S.autoUpdate);
+  flag("setupDone", S.setupDone);
   if (d["aggMode"].is<const char *>())
     for (int k = 0; k < 3; k++) if (d["aggMode"] == AGG_NAMES[k]) S.aggMode = k;
   if (d["webhook"].is<const char *>()) S.webhook = d["webhook"].as<String>();
@@ -1037,12 +1050,14 @@ static void handleSensors() {
     L.w = constrain(d["room"]["w"] | L.w, 1.0f, 100.0f);
     L.l = constrain(d["room"]["l"] | L.l, 1.0f, 100.0f);
     L.h = constrain(d["room"]["h"] | L.h, 1.0f, 20.0f);
+    L.cooler = (d["room"]["cooler"] | L.cooler) & 3;
   }
   if (d["channels"].is<JsonArray>()) {
     JsonArray a = d["channels"];
     for (int i = 0; i < NUM_CHANNELS && i < (int)a.size(); i++) {
       L.chx[i] = constrain(a[i]["x"] | L.chx[i], 0.0f, 1.0f);
       L.chy[i] = constrain(a[i]["y"] | L.chy[i], 0.0f, 1.0f);
+      L.chz[i] = constrain(a[i]["z"] | L.chz[i], 0.0f, L.h);
     }
   }
   saveSettings();
@@ -1088,6 +1103,30 @@ static void handleModbusScan() {
       o["t"] = t;
     }
   }
+  sendJson(r);
+}
+
+// Finds connected sensors: SHT4x/SHT3x on both I2C buses, a DHT on GPIO4, XY-MD03 at Modbus 1-8.
+static void handleDetect() {
+  JsonDocument r;
+  JsonArray found = r["found"].to<JsonArray>();
+  SensorCfg c;
+  SensorRuntime rt;
+  float h, t;
+  auto probe = [&](uint8_t type, uint8_t addr) {
+    c.type = type;
+    c.addr = addr;
+    if (!sensorRead(c, rt, bus, h, t)) return false;
+    JsonObject o = found.add<JsonObject>();
+    o["type"] = SENSOR_TYPE_KEYS[type];
+    o["addr"] = addr;
+    o["rh"] = h;
+    o["t"] = t;
+    return true;
+  };
+  for (uint8_t a : {0x44, 0x45, 0xC4, 0xC5}) probe(ST_SHT4X, a) || probe(ST_SHT3X, a);
+  probe(ST_DHT22, 0) || probe(ST_DHT11, 0);  // DHT11 data decoded as DHT22 is out of range, so try 22 first
+  for (uint8_t a = 1; a <= 8; a++) probe(ST_MB_XYMD02, a);
   sendJson(r);
 }
 
@@ -1259,6 +1298,7 @@ static void setupServer() {
   onApi("/api/sensors", HTTP_POST, handleSensors);
   onApi("/api/bus", HTTP_POST, handleBus);
   onApi("/api/modbus/scan", HTTP_POST, handleModbusScan);
+  onApi("/api/detect", HTTP_POST, handleDetect);
   onApi("/api/modbus/setaddr", HTTP_POST, handleModbusSetAddr);
   onApi("/api/channel", HTTP_POST, handleChannel);
   onApi("/api/resume", HTTP_POST, handleResume);

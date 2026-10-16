@@ -13,6 +13,9 @@ spots and heights, switches ultrasonic humidifiers to hold a target humidity, an
 - **Up to 8 sensors**: RS485 Modbus (XY-MD02 style, FC3 transmitters, or custom register map), SHT3x/SHT4x on I2C, and DHT11/DHT22 for desk testing.
   Per-sensor calibration offsets and a "monitor only" option. Built-in Modbus bus scan and slave-address changer.
 - **Room view**: set room size, then drag each sensor and humidifier to where it really is (top view) and to its height (side view). Shows an interpolated humidity heat map.
+- **Auto layout wizard** (first boot, or Room → Auto layout): enter the room size, cooler wall and number of humidifiers. "Detect sensors" finds connected SHT3x/SHT4x (both I2C buses), a DHT on GPIO4 and XY-MD03 at Modbus addresses 1-8.
+  It then suggests positions and heights: humidifiers high and 0.5 m in front of the cooler so its fan spreads the mist, sensors in the far 60% of the room at mixed heights (middle of the stack, near the floor, near the ceiling). Sensors you don't own yet show as dashed spots.
+  Relays can't be detected, so the humidifier count is entered by hand; unused channels are set to Off.
 - **Control**: target RH with hysteresis, using the average, driest, or wettest control sensor. Min on/off time protects the relay. Two humidifier channels, each Auto / On / Off.
 - **Safety and alerts**: low/high RH, low/high temperature (freezing / cooling failure), uneven humidity between sensors, sensor offline, no humidity rise while running (empty tank: auto stop until you press Resume), long run, optional water float switch.
   Alerts show in the UI, blink the onboard LED, optionally beep a buzzer, and can push to your phone via [ntfy](https://ntfy.sh) or any webhook (when on home Wi-Fi).
@@ -139,7 +142,7 @@ Downloads are verified with GitHub's root certificates (`include/github_ca.h`).
 ## API
 
 `GET /api/state`, `GET /api/history?n=60`, `GET /api/log`, `POST /api/settings`, `POST /api/sensors`,
-`POST /api/channel {i, mode}`, `POST /api/resume`, `POST /api/bus`, `POST /api/modbus/scan`, `POST /api/modbus/setaddr`,
+`POST /api/channel {i, mode}`, `POST /api/resume`, `POST /api/bus`, `POST /api/modbus/scan`, `POST /api/modbus/setaddr`, `POST /api/detect`,
 `GET /api/scan[?start=1]`, `POST /api/wifi {ssid, pass}`, `POST /api/wifi/forget`, `POST /api/test-alert`,
 `POST /api/update` (multipart firmware), `POST /api/ota/check` (returns state with `ota`), `POST /api/ota/install`, `POST /api/reboot`, `POST /api/factory-reset`.
 Public: `/manifest.json`, `/icon-180.png`, `/icon-512.png`.
