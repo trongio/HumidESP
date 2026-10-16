@@ -17,6 +17,13 @@
     <p class="text-slate-500 text-sm mt-1">AliExpress links use aliexpress.ru, because aliexpress.com redirects there from Georgia. dac.ge product pages are <code>dac.ge/en/?product=ID</code>.</p>
   </header>
 
+  <section class="mb-10 rounded-2xl border border-sky-900 bg-slate-900 p-5">
+    <h2 class="text-xl font-semibold">Budget</h2>
+    <p class="text-slate-400 text-sm mt-1">You already have the ESP32, 5 V 5 A supply, relays and atomizer board, so those cost nothing.
+      Prices are approximate (GEL, October 2026); AliExpress prices change with sales and shipping.</p>
+    <div class="grid md:grid-cols-2 gap-4 mt-4" id="budget"></div>
+  </section>
+
   <section id="list" class="space-y-10"></section>
 
   <section class="mt-12 rounded-2xl border border-slate-800 bg-slate-900 p-5 text-sm text-slate-300 space-y-2">
@@ -47,7 +54,7 @@ const ITEMS = [
        ['AliExpress auto flow control module', 'https://aliexpress.ru/item/1005004511376804.html'],
        ['AliExpress search', 'https://aliexpress.ru/wholesale?SearchText=TTL%20to%20RS485%20automatic%20flow%20control'],
      ]},
-    {name: 'Relay module 5 V, high/low trigger', qty: '1-2 pcs', price: '4.8 GEL',
+    {name: 'Relay module 5 V, high/low trigger', qty: 'skip, you have relays', price: '4.8 GEL',
      why: 'Switches the atomizer board\'s 5 V input. Set the jumper to H. Skip if your red relay boards have the H/L jumper.',
      links: [
        ['dac.ge AR0311 1-channel', 'https://dac.ge/en/?product=5629'],
@@ -61,7 +68,7 @@ const ITEMS = [
        ['dac.ge Z90 80×170×220 mm', 'https://dac.ge/en/?product=4981'],
        ['AliExpress IP67 ABS box', 'https://aliexpress.ru/item/4000287507400.html'],
      ]},
-    {name: 'Cable glands PG7 / PG9', qty: '1 set', price: 'few GEL',
+    {name: 'Cable glands PG7 / PG9', qty: '1 set', price: '~4 GEL',
      why: 'Seal where cables enter the box. dac.ge doesn\'t stock them.',
      links: [
        ['AliExpress nylon IP68 glands', 'https://aliexpress.ru/item/1005012013946264.html'],
@@ -81,13 +88,13 @@ const ITEMS = [
        ['dac.ge AR0187 24 V 19 W', 'https://dac.ge/en/?product=47557'],
        ['AliExpress 10-head 24 V industrial', 'https://aliexpress.ru/item/1005013276573532.html'],
      ]},
-    {name: 'Spare atomizer discs', qty: 'a few', price: 'cheap',
+    {name: 'Spare atomizer discs', qty: 'a few', price: '~4 GEL each',
      why: 'They wear out, especially with hard water.',
      links: [
        ['dac.ge 20 mm disc', 'https://dac.ge/en/?product=45654'],
        ['dac.ge 25 mm disc', 'https://dac.ge/en/?product=45655'],
      ]},
-    {name: 'Float switch (stainless)', qty: '1 pc', price: 'few GEL',
+    {name: 'Float switch (stainless)', qty: '1 pc', price: '~5 GEL',
      why: 'Stops the humidifiers when the water runs low (GPIO33). Avoid resistive PCB water sensors: they corrode.',
      links: [
        ['AliExpress float switch', 'https://aliexpress.ru/item/33004754249.html'],
@@ -121,6 +128,39 @@ const ITEMS = [
      ]},
   ]},
 ];
+
+// [item, qty, unit price GEL]
+const BUDGET = [
+  {name: 'Cheap start', note: 'Enough for a small apple fridge: one sensor high, one low.', rows: [
+    ['XY-MD03 RS485 probe (AliExpress)', 2, 15],
+    ['TTL to RS485 module (AliExpress)', 1, 2],
+    ['CAT5E cable', 10, 1],
+    ['AliExpress IP67 ABS box', 1, 10],
+    ['Cable glands PG7 (set)', 1, 4],
+    ['120 Ω resistor, wire, heat shrink', 1, 3],
+  ]},
+  {name: 'Better', note: 'For 25-30 m²: 4 sensors at different spots and heights, plus water and alarm extras.', rows: [
+    ['XY-MD03 RS485 probe (AliExpress)', 4, 15],
+    ['TTL to RS485 module (dac.ge AR0405, buy today)', 1, 9],
+    ['CAT5E cable', 20, 1],
+    ['dac.ge Z46A enclosure', 1, 18],
+    ['Cable glands PG7 (set)', 1, 4],
+    ['Float switch', 1, 5],
+    ['Active buzzer (dac.ge AR0167)', 1, 2.4],
+    ['Spare atomizer discs', 2, 4],
+    ['120 Ω resistor, wire, heat shrink', 1, 3],
+  ]},
+];
+const gel = v => (Math.round(v * 10) / 10) + ' GEL';
+document.getElementById('budget').innerHTML = BUDGET.map(b => {
+  const total = b.rows.reduce((t, [, q, p]) => t + q * p, 0);
+  return `<div class="rounded-xl bg-slate-950/60 ring-1 ring-slate-800 p-4">
+    <div class="flex justify-between items-baseline"><h3 class="font-semibold text-lg">${b.name}</h3><span class="text-2xl font-bold text-sky-400">~${gel(total)}</span></div>
+    <p class="text-slate-400 text-sm">${b.note}</p>
+    <table class="w-full text-sm mt-3"><tbody>${b.rows.map(([n, q, p]) =>
+      `<tr class="border-t border-slate-800"><td class="py-1">${n}</td><td class="text-slate-400 text-right px-2">${q}×</td><td class="text-right">${gel(q * p)}</td></tr>`).join('')}</tbody></table>
+  </div>`;
+}).join('');
 
 const host = u => new URL(u).hostname.replace(/^www\./, '');
 const badge = u => {
