@@ -101,6 +101,14 @@ const ITEMS = [
        ['AliExpress shielded RS485 cable', 'https://www.aliexpress.com/item/1005010456519871.html'],
      ]},
   ]},
+  {group: 'Not smart, but works (no ESP32)', items: [
+    {name: 'XH-W3005 humidity controller + 24 V fogger', qty: '1 + 1-3', price: 'controller ~$5.49 (first-order price), fogger $10.29',
+     why: 'Plain humidistat with a display and a relay: set the on/off humidity, it switches the fogger. Wire it like the ESP relay (cut the fogger + wire, COM/NO). Limits: one probe on a short cable, no alerts, no low-water warning, no history, and cheap probes are least accurate near 95 %RH. Good as a stopgap or backup.',
+     links: [
+       ['AliExpress search: XH-W3005', 'https://www.aliexpress.com/wholesale?SearchText=XH-W3005%20humidity%20controller'],
+       ['AliExpress search: plug-in humidity controller', 'https://www.aliexpress.com/wholesale?SearchText=plug%20in%20humidity%20controller%20socket'],
+     ]},
+  ]},
   {group: 'Longer-lasting humidifiers', items: [
     {name: '24 V ultrasonic fogger, 1 head (with 24 V adapter)', qty: '1-2 pcs', price: '$8.31-15.23, free shipping over $10',
      why: 'Thick ceramic disc, about 3,000-5,000 h, around 300 ml/h each. Sits in a water tank with its own float. Best upgrade for a small fridge: the relay switches its adapter (or its 24 V side). Pick the listing "with EU plug" so the adapter is included.',
@@ -137,6 +145,11 @@ const ITEMS = [
      links: [
        ['dac.ge 20 mm disc', 'https://dac.ge/en/?product=45654'],
        ['dac.ge 25 mm disc', 'https://dac.ge/en/?product=45655'],
+     ]},
+    {name: 'Non-contact water level sensor XKC-Y25-NPN (5-24 V)', qty: '1 pc', price: 'a few $',
+     why: 'Sticks on the outside of a plastic tank, nothing in the water, no corrosion. Brown to 5 V, blue to GND, black (signal) to GPIO33. Mount it 3-5 cm above the fogger discs. In Settings enable "Water float switch" and keep "Switch closed = water OK" ticked: when the water drops below it the humidifiers stop and the alert reaches your phone (ntfy).',
+     links: [
+       ['AliExpress search: XKC-Y25-NPN', 'https://www.aliexpress.com/wholesale?SearchText=XKC-Y25-NPN%20non%20contact%20liquid%20level%20sensor'],
      ]},
     {name: 'Float switch (stainless)', qty: '1 pc', price: '$2.80, free shipping over $10',
      why: 'Stops the humidifiers when the water runs low (GPIO33). Avoid resistive PCB water sensors: they corrode.',
