@@ -191,6 +191,7 @@ static void sensorsToJson(JsonArray a) {
   }
 }
 
+static void saveSettings();
 static void loadSettings() {
   prefs.begin("humid", true);
   S.target = prefs.getFloat("target", S.target);
@@ -243,6 +244,7 @@ static void loadSettings() {
   if (prefs.isKey("pwHash"))
     authOn = prefs.getBytes("pwHash", pwHash, 32) == 32 && prefs.getBytes("pwSalt", pwSalt, 16) == 16;
   if (prefs.isKey("sess")) prefs.getBytes("sess", sessions, sizeof(sessions));
+  bool fresh = !prefs.isKey("ssid");
   prefs.end();
 
   if (sensors.empty()) {  // first boot: the DHT11 on the desk
@@ -251,6 +253,8 @@ static void loadSettings() {
     c.name = "Desk DHT11";
     sensors.push_back(c);
   }
+  // Save defaults once, so Wi-Fi from secrets.h survives updating to a release build without it.
+  if (fresh) saveSettings();
 }
 
 static void saveSettings() {
