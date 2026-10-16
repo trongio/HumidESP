@@ -102,10 +102,11 @@ const ITEMS = [
      ]},
   ]},
   {group: 'Not smart, but works (no ESP32)', items: [
-    {name: 'XH-W3005 humidity controller + 24 V fogger', qty: '1 + 1-3', price: 'controller ~$5.49 (first-order price), fogger $10.29',
-     why: 'Plain humidistat with a display and a relay: set the on/off humidity, it switches the fogger. Wire it like the ESP relay (cut the fogger + wire, COM/NO). Limits: one probe on a short cable, no alerts, no low-water warning, no history, and cheap probes are least accurate near 95 %RH. Good as a stopgap or backup.',
+    {name: 'XH-W3005 humidity controller + 24 V fogger', qty: '1 + 1-3', price: 'controller $5.69 (Choice, 4.9★, 1,000+ sold), fogger $10.29',
+     why: 'Plain humidistat with a display and a relay: set the on/off humidity, it switches the fogger. Tip: the 24 V version can run off the fogger's own 24 V adapter. Wire it like the ESP relay (cut the fogger + wire, COM/NO). Limits: one probe on a short cable, no alerts, no low-water warning, no history, and cheap probes are least accurate near 95 %RH. Good as a stopgap or backup.',
      links: [
-       ['AliExpress search: XH-W3005', 'https://www.aliexpress.com/wholesale?SearchText=XH-W3005%20humidity%20controller'],
+       ['AliExpress XH-W3005 (pick the 24 V or 220 V version)', 'https://www.aliexpress.com/item/1005008554729249.html'],
+       ['AliExpress search: XH-W3005', 'https://www.aliexpress.com/wholesale?SearchText=XH%20W3005%20humidity%20controller'],
        ['AliExpress search: plug-in humidity controller', 'https://www.aliexpress.com/wholesale?SearchText=plug%20in%20humidity%20controller%20socket'],
      ]},
   ]},
@@ -188,6 +189,11 @@ const ITEMS = [
 
 // [item, qty, unit price GEL]
 const BUDGET = [
+  {name: 'Ready-made, not smart', note: 'XH-W3005 humidistat switching one 24 V fogger. Works, but no alerts, one sensor, no history. Both Choice items: free shipping over $10.', rows: [
+    ['XH-W3005 humidity controller', 1, 5.69],
+    ['24 V fogger, 1 head, with adapter', 1, 10.29],
+    ['Shipping (Choice, over $10)', 1, 0],
+  ]},
   {name: 'Cheapest: small fridge', note: 'ESP box right next to the fridge (I2C cables reach about 1-2 m). One probe per I2C bus, so each gets its own 4 wires. Free shipping over $10.', rows: [
     ['SHT40 / SHT31 waterproof I2C probe, 1 m', 2, 3.69],
     ['Stainless float switch (gets the order over $10)', 1, 2.80],
