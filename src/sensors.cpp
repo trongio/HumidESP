@@ -20,6 +20,8 @@ void sensorsBegin(const ModbusBus &bus) {
   dht22.begin();
   Wire.begin(PIN_SDA, PIN_SCL, 50000);  // slow clock tolerates longer wires
   Wire.setTimeOut(50);
+  Wire1.begin(PIN_SDA2, PIN_SCL2, 50000);
+  Wire1.setTimeOut(50);
   pinMode(PIN_RS485_DE, OUTPUT);
   digitalWrite(PIN_RS485_DE, LOW);
   Serial2.end();
@@ -38,16 +40,25 @@ static uint8_t crc8(const uint8_t *d, int n) {
   return c;
 }
 
+// Bit 7 of the address picks the second bus.
+static TwoWire &i2cBus(uint8_t &addr) {
+  bool second = addr & 0x80;
+  addr &= 0x7F;
+  return second ? Wire1 : Wire;
+}
+
 static bool i2cCommand(uint8_t addr, const uint8_t *cmd, int len) {
-  Wire.beginTransmission(addr);
-  Wire.write(cmd, len);
-  return Wire.endTransmission() == 0;
+  TwoWire &w = i2cBus(addr);
+  w.beginTransmission(addr);
+  w.write(cmd, len);
+  return w.endTransmission() == 0;
 }
 
 static bool i2cRead6(uint8_t addr, uint16_t &a, uint16_t &b) {
   uint8_t d[6];
-  if (Wire.requestFrom(addr, (uint8_t)6) != 6) return false;
-  for (auto &x : d) x = Wire.read();
+  TwoWire &w = i2cBus(addr);
+  if (w.requestFrom(addr, (uint8_t)6) != 6) return false;
+  for (auto &x : d) x = w.read();
   if (crc8(d, 2) != d[2] || crc8(d + 3, 2) != d[5]) return false;
   a = (d[0] << 8) | d[1];
   b = (d[3] << 8) | d[4];

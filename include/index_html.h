@@ -112,6 +112,7 @@ svg.room .drag{cursor:grab}
     <option value="dht22">DHT22 on GPIO4</option>
     <option value="dht11">DHT11 on GPIO4 (testing only)</option></select></label>
    <label>Address<input type="number" id="sAddr" min="0" max="247"><span id="sAddrHint" class="mut sm"></span></label>
+   <label id="sBusL">I2C bus<select id="sBus"><option value="0">1: SDA GPIO21, SCL GPIO22</option><option value="128">2: SDA GPIO19, SCL GPIO23</option></select></label>
    <label>Height above floor (m)<input type="number" id="sZ" step="0.1" min="0"></label>
    <label>Humidity offset (%)<input type="number" id="sHOff" step="0.5"></label>
    <label>Temperature offset (&deg;C)<input type="number" id="sTOff" step="0.1"></label>
@@ -255,7 +256,7 @@ async function refresh(){
   <div class="mut sm" style="margin-left:18px">${c.lockout?'Safety stop':c.on?'Running':'Idle'} for ${dur(c.since)}</div></div>
   <div class="seg">${['auto','on','off'].map(m=>`<button class="${c.mode==m?'act':''}" onclick="setMode(${i},'${m}')">${m[0].toUpperCase()+m.slice(1)}</button>`).join('')}</div></div>`).join('');
  $('sens').innerHTML=st.sensors.map((x,i)=>`<tr><td><span class="sw" style="background:${COLORS[i%8]}"></span>${esc(x.name)}${x.control?'':' <span class="mut sm">(monitor)</span>'}</td>
-  <td class="hide-m mut">${TYPE_LBL[x.type]}${x.addr?' #'+x.addr:''}</td><td>${x.z.toFixed(1)} m</td>
+  <td class="hide-m mut">${TYPE_LBL[x.type]}${x.type.startsWith('sht')?' 0x'+(x.addr&127).toString(16)+(x.addr&128?' bus 2':''):x.addr?' #'+x.addr:''}</td><td>${x.z.toFixed(1)} m</td>
   <td style="color:${x.ok?rhColor(x.rh):'var(--bad)'}">${x.ok?x.rh.toFixed(1)+'%':'offline'}</td><td>${x.ok?x.t.toFixed(1)+'°':''}</td>
   <td><button class="s" onclick="editSensor(${i})">Edit</button></td></tr>`).join('')||'<tr><td colspan="6" class="mut">No sensors yet</td></tr>';
  if(!editing)fillSettings();
@@ -310,13 +311,13 @@ function roomDims(){const w=+$('rw').value,l=+$('rl').value,h=+$('rhh').value;if
 async function saveModel(){try{await api('/api/sensors',model);toast('Saved');editLayout=false;toggleEdit(false)}catch(e){toast(e.message)}}
 
 // ---------- Sensor editor ----------
-function typeHint(){const t=$('sType').value;$('sAddrHint').textContent={sht3x:'0x44 = 68, 0x45 = 69',sht4x:'0x44 = 68 (SHT40-AD1B), 0x45 = 69 (BD1B)',dht11:'not used',dht22:'not used'}[t]||'Modbus slave address 1-247'}
+function typeHint(){const t=$('sType').value,i2c=t.startsWith('sht');$('sBusL').style.display=i2c?'':'none';if(i2c&&!(+$('sAddr').value>0))$('sAddr').value=68;$('sAddrHint').textContent={sht3x:'0x44 = 68, 0x45 = 69',sht4x:'0x44 = 68 (SHT40-AD1B), 0x45 = 69 (BD1B)',dht11:'not used',dht22:'not used'}[t]||'Modbus slave address 1-247'}
 function editSensor(i){if(editLayout)toggleEdit(false);if(i<0&&st.sensors.length>=8)return toast('Maximum 8 sensors');editIdx=i;const x=i<0?{name:'Sensor '+(st.sensors.length+1),type:'xymd02',addr:st.sensors.filter(s=>s.type=='xymd02').length+1,z:1.5,control:true,hOff:0,tOff:0}:st.sensors[i];
- $('sName').value=x.name;$('sType').value=x.type;$('sAddr').value=x.addr;$('sZ').value=x.z;$('sHOff').value=x.hOff;$('sTOff').value=x.tOff;$('sCtl').checked=x.control;$('sDel').style.display=i<0?'none':'';typeHint();
+ $('sName').value=x.name;$('sType').value=x.type;$('sAddr').value=x.addr&127;$('sBus').value=x.type.startsWith('sht')?x.addr&128:0;$('sZ').value=x.z;$('sHOff').value=x.hOff;$('sTOff').value=x.tOff;$('sCtl').checked=x.control;$('sDel').style.display=i<0?'none':'';typeHint();
  $('sensEdit').style.display='';$('sensEdit').scrollIntoView({behavior:'smooth',block:'nearest'})}
 async function postSensors(list){await api('/api/sensors',{sensors:list});$('sensEdit').style.display='none';await refresh();loadHist()}
 async function saveSensor(){const list=clone(st.sensors),o=editIdx<0?{x:.5,y:.5}:list[editIdx];
- Object.assign(o,{name:$('sName').value.trim()||'Sensor',type:$('sType').value,addr:+$('sAddr').value||0,z:+$('sZ').value||0,hOff:+$('sHOff').value||0,tOff:+$('sTOff').value||0,control:$('sCtl').checked});
+ Object.assign(o,{name:$('sName').value.trim()||'Sensor',type:$('sType').value,addr:(+$('sAddr').value||0)|($('sType').value.startsWith('sht')?+$('sBus').value:0),z:+$('sZ').value||0,hOff:+$('sHOff').value||0,tOff:+$('sTOff').value||0,control:$('sCtl').checked});
  if(editIdx<0)list.push(o);try{await postSensors(list);toast('Sensor saved')}catch(e){toast(e.message)}}
 async function delSensor(){if(!confirm('Remove this sensor?'))return;const list=clone(st.sensors);list.splice(editIdx,1);try{await postSensors(list)}catch(e){toast(e.message)}}
 async function saveBus(){try{await api('/api/bus',{baud:+$('bBaud').value,fc:+$('bFc').value,humReg:+$('bHum').value,tempReg:+$('bTemp').value,addrReg:+$('bAddr').value});editing=false;toast('Bus saved')}catch(e){toast(e.message)}}

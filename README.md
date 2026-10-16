@@ -60,7 +60,8 @@ Mist hitting a sensor makes it read 100 %.
 | GPIO26 / GPIO27 | relay IN1 / IN2 |
 | GPIO17 (TX2) / GPIO16 (RX2) | RS485 module TXD(DI) / RXD(RO). Swap if the scan finds nothing |
 | GPIO18 | RS485 DE+RE (only for modules without auto direction) |
-| GPIO21 / GPIO22 | I2C SDA / SCL (SHT3x/SHT4x, short cables) |
+| GPIO21 / GPIO22 | I2C bus 1 SDA / SCL (SHT3x/SHT4x probe, cable up to about 2 m) |
+| GPIO19 / GPIO23 | I2C bus 2 SDA / SCL (a second probe; most probes have the same fixed address 0x44) |
 | GPIO4 | DHT11/DHT22 data (testing) |
 | GPIO32 / GPIO13 | optional PC817 "button press" for humidifier 1 / 2 |
 | GPIO33 | optional float switch to GND |

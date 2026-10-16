@@ -19,9 +19,10 @@
 
   <section class="mb-10 rounded-2xl border border-sky-900 bg-slate-900 p-5">
     <h2 class="text-xl font-semibold">Budget</h2>
+    <p class="text-sky-300 text-sm mt-1">Small fridge? The first option is all you need. RS485 is only worth it when sensors are many metres from the ESP.</p>
     <p class="text-slate-400 text-sm mt-1">You already have the ESP32, 5 V 5 A supply, relays and atomizer board, so those cost nothing.
       Prices in USD. dac.ge items converted at about 2.7 GEL per dollar. Each AliExpress seller charges its own shipping (about $5-9), so order from as few sellers as you can.</p>
-    <div class="grid md:grid-cols-2 gap-4 mt-4" id="budget"></div>
+    <div class="grid md:grid-cols-3 gap-4 mt-4" id="budget"></div>
   </section>
 
   <section id="list" class="space-y-10"></section>
@@ -38,7 +39,15 @@
 
 <script>
 const ITEMS = [
-  {group: 'Must have', items: [
+  {group: 'Cheapest: small fridge', items: [
+    {name: 'SHT40 / SHT31 waterproof I2C probe (1 m cable)', qty: '2 pcs', price: '$3.69 each for 2+, free shipping over $10',
+     why: 'Cheapest good sensor for a small fridge. 0-100 %RH, sealed probe. Probe 1 on GPIO21/22, probe 2 on GPIO19/23 (I2C bus 2 in the sensor editor). Red = 3.3 V, black = GND, then SDA and SCL. Firmware type: "SHT40/41/45" or "SHT30/31/35", address 68 (0x44).',
+     links: [
+       ['AliExpress search: SHT31 waterproof probe', 'https://www.aliexpress.com/wholesale?SearchText=SHT31%20waterproof%20probe'],
+       ['AliExpress search: SHT40 probe I2C', 'https://www.aliexpress.com/wholesale?SearchText=SHT40%20probe%20I2C%20waterproof'],
+     ]},
+  ]},
+  {group: 'Bigger room (RS485, long cables)', items: [
     {name: 'XY-MD03 RS485 Modbus temp/humidity probe (SHT40)', qty: '3-4 pcs', price: '$4.51-4.89 first order, then $9.79-10.84, + $5.64-6.46 shipping',
      why: 'For the room itself. 0-100 %RH, -40 to 80 °C, waterproof probe on 1 m cable, 5-28 V. Daisy-chains on one cable. Firmware type: "XY-MD03 / XY-MD02".',
      links: [
@@ -131,6 +140,12 @@ const ITEMS = [
 
 // [item, qty, unit price GEL]
 const BUDGET = [
+  {name: 'Cheapest: small fridge', note: 'ESP box right next to the fridge (I2C cables reach about 1-2 m). One probe per I2C bus, so each gets its own 4 wires. Free shipping over $10.', rows: [
+    ['SHT40 / SHT31 waterproof I2C probe, 1 m', 2, 3.69],
+    ['Stainless float switch (gets the order over $10)', 1, 2.80],
+    ['Plastic food box as the enclosure', 1, 0],
+    ['Shipping (Choice, over $10)', 1, 0],
+  ]},
   {name: 'Cheap start', note: 'Enough for a small apple fridge: one sensor high, one low.', rows: [
     ['XY-MD03 probe, first-order deal', 1, 4.51],
     ['XY-MD03 probe, normal price', 1, 9.79],

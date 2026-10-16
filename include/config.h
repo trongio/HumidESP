@@ -7,6 +7,8 @@
 
 #define PIN_SDA          21   // I2C for SHT3x / SHT4x breakouts (short cables only)
 #define PIN_SCL          22
+#define PIN_SDA2         19   // second I2C bus, so two probes with the same address can be used
+#define PIN_SCL2         23
 
 #define PIN_RS485_RX     16   // RS485 module RO / RXD
 #define PIN_RS485_TX     17   // RS485 module DI / TXD

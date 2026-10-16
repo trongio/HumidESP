@@ -18,7 +18,7 @@ bool sensorIsModbus(uint8_t type);
 
 struct SensorCfg {
   uint8_t type = ST_DHT11;
-  uint8_t addr = 0;     // I2C or Modbus address
+  uint8_t addr = 0;     // Modbus address, or I2C address (+0x80 = second I2C bus)
   String name;
   float x = 0.5, y = 0.5; // position in room, 0..1 of width / length
   float z = 1.5;          // height above floor in metres
