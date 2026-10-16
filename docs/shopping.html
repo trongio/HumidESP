@@ -14,13 +14,13 @@
     <h1 class="text-3xl font-bold">HumidESP <span class="text-sky-400">parts list</span></h1>
     <p class="text-slate-400 mt-2">For a 25-30 m² apple cold room (0-4 °C, 90-95 %RH). Links checked on 2026-10-16. Prices are approximate.
       Scan a QR code to open the link on your phone.</p>
-    <p class="text-slate-500 text-sm mt-1">AliExpress links use aliexpress.ru, because aliexpress.com redirects there from Georgia. dac.ge product pages are <code>dac.ge/en/?product=ID</code>.</p>
+    <p class="text-slate-500 text-sm mt-1">AliExpress prices were read in the AliExpress app (USD account) on 2026-10-17. They are for the cheapest variant and change with sales. QR codes open in the app. dac.ge product pages are <code>dac.ge/en/?product=ID</code>.</p>
   </header>
 
   <section class="mb-10 rounded-2xl border border-sky-900 bg-slate-900 p-5">
     <h2 class="text-xl font-semibold">Budget</h2>
     <p class="text-slate-400 text-sm mt-1">You already have the ESP32, 5 V 5 A supply, relays and atomizer board, so those cost nothing.
-      Prices are approximate (GEL, October 2026); AliExpress prices change with sales and shipping.</p>
+      Prices in USD. dac.ge items converted at about 2.7 GEL per dollar. Each AliExpress seller charges its own shipping (about $5-9), so order from as few sellers as you can.</p>
     <div class="grid md:grid-cols-2 gap-4 mt-4" id="budget"></div>
   </section>
 
@@ -39,20 +39,20 @@
 <script>
 const ITEMS = [
   {group: 'Must have', items: [
-    {name: 'XY-MD03 RS485 Modbus temp/humidity probe (SHT40)', qty: '3-4 pcs', price: '~13-18 GEL each',
+    {name: 'XY-MD03 RS485 Modbus temp/humidity probe (SHT40)', qty: '3-4 pcs', price: '$4.51-4.89 first order, then $9.79-10.84, + $5.64-6.46 shipping',
      why: 'For the room itself. 0-100 %RH, -40 to 80 °C, waterproof probe on 1 m cable, 5-28 V. Daisy-chains on one cable. Firmware type: "XY-MD03 / XY-MD02".',
      links: [
-       ['AliExpress item (metal or plastic probe)', 'https://aliexpress.ru/item/1005006124552708.html'],
-       ['AliExpress item (alternative seller)', 'https://aliexpress.ru/item/1005006221560672.html'],
-       ['AliExpress search: xy-md03', 'https://aliexpress.ru/wholesale?SearchText=xy-md03'],
+       ['AliExpress item (metal or plastic probe)', 'https://www.aliexpress.com/item/1005006124552708.html'],
+       ['AliExpress item (alternative seller)', 'https://www.aliexpress.com/item/1005006221560672.html'],
+       ['AliExpress search: xy-md03', 'https://www.aliexpress.com/wholesale?SearchText=xy-md03'],
        ['Datasheet / register map', 'https://attach01.oss-us-west-1.aliyuncs.com/IC/Datasheet/GY21249.pdf'],
      ]},
-    {name: 'TTL to RS485 converter', qty: '1 pc', price: '9 GEL / ~1 GEL',
+    {name: 'TTL to RS485 converter', qty: '1 pc', price: 'dac.ge 9 GEL / AliExpress $0.76 + $5.22 shipping',
      why: 'Connects the ESP32 (GPIO16/17) to the sensor cable. Pick a 3.3 V-capable automatic-direction module.',
      links: [
        ['dac.ge AR0405 (3-30 V)', 'https://dac.ge/en/?product=46129'],
-       ['AliExpress auto flow control module', 'https://aliexpress.ru/item/1005004511376804.html'],
-       ['AliExpress search', 'https://aliexpress.ru/wholesale?SearchText=TTL%20to%20RS485%20automatic%20flow%20control'],
+       ['AliExpress auto flow control module', 'https://www.aliexpress.com/item/1005004511376804.html'],
+       ['AliExpress search', 'https://www.aliexpress.com/wholesale?SearchText=TTL%20to%20RS485%20automatic%20flow%20control'],
      ]},
     {name: 'Relay module 5 V, high/low trigger', qty: 'skip, you have relays', price: '4.8 GEL',
      why: 'Switches the atomizer board\'s 5 V input. Set the jumper to H. Skip if your red relay boards have the H/L jumper.',
@@ -61,24 +61,24 @@ const ITEMS = [
        ['dac.ge AR0310 (screw terminals)', 'https://dac.ge/en/?product=45782'],
        ['dac.ge AR0312 2-channel', 'https://dac.ge/en/?product=5631'],
      ]},
-    {name: 'Sealed enclosure', qty: '1 pc', price: '18-44 GEL',
+    {name: 'Sealed enclosure', qty: '1 pc', price: 'dac.ge 18-44 GEL / AliExpress $2.85 + $9.30 shipping',
      why: 'Holds the ESP32, PSU, relay and RS485 module. Mount it outside the cold room if you can, so only the sensor cable goes inside.',
      links: [
        ['dac.ge Z46A 73×142×195 mm', 'https://dac.ge/en/?product=4972'],
        ['dac.ge Z90 80×170×220 mm', 'https://dac.ge/en/?product=4981'],
-       ['AliExpress IP67 ABS box', 'https://aliexpress.ru/item/4000287507400.html'],
+       ['AliExpress IP67 ABS box', 'https://www.aliexpress.com/item/4000287507400.html'],
      ]},
-    {name: 'Cable glands PG7 / PG9', qty: '1 set', price: '~4 GEL',
+    {name: 'Cable glands PG7 / PG9', qty: '1 set', price: '$2.59 for 5',
      why: 'Seal where cables enter the box. dac.ge doesn\'t stock them.',
      links: [
-       ['AliExpress nylon IP68 glands', 'https://aliexpress.ru/item/1005012013946264.html'],
-       ['AliExpress search', 'https://aliexpress.ru/wholesale?SearchText=cable%20gland%20waterproof%20PG7'],
+       ['AliExpress nylon IP68 glands', 'https://www.aliexpress.com/item/1005012013946264.html'],
+       ['AliExpress search', 'https://www.aliexpress.com/wholesale?SearchText=cable%20gland%20waterproof%20PG7'],
      ]},
-    {name: 'Sensor cable (CAT5E or shielded twisted pair)', qty: 'room length + 5 m', price: '1 GEL/m',
+    {name: 'Sensor cable (CAT5E or shielded twisted pair)', qty: 'room length + 5 m', price: 'dac.ge 1 GEL/m / AliExpress shielded from $9.09',
      why: 'One twisted pair for RS485 A/B, another pair for 5 V and GND.',
      links: [
        ['dac.ge CAT5E UTP', 'https://dac.ge/en/?product=48619'],
-       ['AliExpress shielded RS485 cable', 'https://aliexpress.ru/item/1005010456519871.html'],
+       ['AliExpress shielded RS485 cable', 'https://www.aliexpress.com/item/1005010456519871.html'],
      ]},
   ]},
   {group: 'Optional', items: [
@@ -86,7 +86,7 @@ const ITEMS = [
      why: 'The 4 small discs may struggle against the cooler, which keeps drying the air. This one does 250-450 ml/h. Needs its own 24 V supply, switched by the same relay.',
      links: [
        ['dac.ge AR0187 24 V 19 W', 'https://dac.ge/en/?product=47557'],
-       ['AliExpress 10-head 24 V industrial', 'https://aliexpress.ru/item/1005013276573532.html'],
+       ['AliExpress 10-head 24 V industrial', 'https://www.aliexpress.com/item/1005013276573532.html'],
      ]},
     {name: 'Spare atomizer discs', qty: 'a few', price: '~4 GEL each',
      why: 'They wear out, especially with hard water.',
@@ -94,10 +94,10 @@ const ITEMS = [
        ['dac.ge 20 mm disc', 'https://dac.ge/en/?product=45654'],
        ['dac.ge 25 mm disc', 'https://dac.ge/en/?product=45655'],
      ]},
-    {name: 'Float switch (stainless)', qty: '1 pc', price: '~5 GEL',
+    {name: 'Float switch (stainless)', qty: '1 pc', price: '$2.80, free shipping over $10',
      why: 'Stops the humidifiers when the water runs low (GPIO33). Avoid resistive PCB water sensors: they corrode.',
      links: [
-       ['AliExpress float switch', 'https://aliexpress.ru/item/33004754249.html'],
+       ['AliExpress float switch', 'https://www.aliexpress.com/item/33004754249.html'],
      ]},
     {name: 'Active buzzer module', qty: '1 pc', price: '2.4 GEL',
      why: 'Beeps on alerts (GPIO25). The dac.ge module is low-trigger: set BUZZER_ACTIVE_HIGH false in config.h.',
@@ -108,7 +108,7 @@ const ITEMS = [
      why: 'No clicking and no contact wear. Switches the low side (GND) of the atomizer board.',
      links: [
        ['dac.ge AR0350 isolated MOSFET', 'https://dac.ge/en/?product=47465'],
-       ['AliExpress D4184 module', 'https://aliexpress.ru/item/1005002626970800.html'],
+       ['AliExpress D4184 module', 'https://www.aliexpress.com/item/1005002626970800.html'],
      ]},
     {name: 'Adafruit SHT45 with PTFE membrane (I2C)', qty: 'if wanted', price: '$13.50',
      why: 'Very accurate, but I2C only works over short cables (1-2 m). Good for a sensor right next to the box. Firmware type: "SHT40/41/45".',
@@ -132,26 +132,30 @@ const ITEMS = [
 // [item, qty, unit price GEL]
 const BUDGET = [
   {name: 'Cheap start', note: 'Enough for a small apple fridge: one sensor high, one low.', rows: [
-    ['XY-MD03 RS485 probe (AliExpress)', 2, 15],
-    ['TTL to RS485 module (AliExpress)', 1, 2],
-    ['CAT5E cable', 10, 1],
-    ['AliExpress IP67 ABS box', 1, 10],
-    ['Cable glands PG7 (set)', 1, 4],
-    ['120 Ω resistor, wire, heat shrink', 1, 3],
+    ['XY-MD03 probe, first-order deal', 1, 4.51],
+    ['XY-MD03 probe, normal price', 1, 9.79],
+    ['TTL to RS485 module', 1, 0.76],
+    ['IP67 ABS box', 1, 2.85],
+    ['Cable glands (5 pcs)', 1, 2.59],
+    ['CAT5E cable, dac.ge (per m)', 10, 0.37],
+    ['120 Ω resistor, wire, heat shrink', 1, 1],
+    ['Shipping, about 3 sellers (estimate)', 1, 18],
   ]},
   {name: 'Better', note: 'For 25-30 m²: 4 sensors at different spots and heights, plus water and alarm extras.', rows: [
-    ['XY-MD03 RS485 probe (AliExpress)', 4, 15],
-    ['TTL to RS485 module (dac.ge AR0405, buy today)', 1, 9],
-    ['CAT5E cable', 20, 1],
-    ['dac.ge Z46A enclosure', 1, 18],
-    ['Cable glands PG7 (set)', 1, 4],
-    ['Float switch', 1, 5],
-    ['Active buzzer (dac.ge AR0167)', 1, 2.4],
-    ['Spare atomizer discs', 2, 4],
-    ['120 Ω resistor, wire, heat shrink', 1, 3],
+    ['XY-MD03 probe, first-order deal', 1, 4.51],
+    ['XY-MD03 probe, normal price', 3, 9.79],
+    ['TTL to RS485 module', 1, 0.76],
+    ['IP67 ABS box', 1, 2.85],
+    ['Cable glands (5 pcs)', 1, 2.59],
+    ['Stainless float switch', 1, 2.80],
+    ['CAT5E cable, dac.ge (per m)', 20, 0.37],
+    ['Active buzzer, dac.ge', 1, 0.9],
+    ['Spare atomizer discs, dac.ge', 2, 1.5],
+    ['120 Ω resistor, wire, heat shrink', 1, 1],
+    ['Shipping, about 4 sellers (estimate)', 1, 24],
   ]},
 ];
-const gel = v => (Math.round(v * 10) / 10) + ' GEL';
+const gel = v => '$' + v.toFixed(2);
 document.getElementById('budget').innerHTML = BUDGET.map(b => {
   const total = b.rows.reduce((t, [, q, p]) => t + q * p, 0);
   return `<div class="rounded-xl bg-slate-950/60 ring-1 ring-slate-800 p-4">
